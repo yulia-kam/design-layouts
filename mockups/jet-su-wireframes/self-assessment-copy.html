@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Самооценка — шаг и результат</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.narrow{max-width:880px;margin:0 auto;padding:0 16px;box-sizing:border-box}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;border-bottom:1px solid #e0e0e0}
+.logo{font-weight:700;font-size:20px;color:#111;letter-spacing:-.01em}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 24px;border:1px solid #111;font-size:16px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c;color:#111}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.opt{display:flex;align-items:flex-start;gap:16px;padding:20px;border:1px solid #cfcfcf;cursor:pointer;font-size:18px;line-height:1.4}
+.opt:hover{border-color:#111}
+.opt input{width:20px;height:20px;margin:2px 0 0;accent-color:#1E3BD6;flex:0 0 auto}
+.opt-on{border-color:#1E3BD6;background:#f1f4ff}
+.dim{display:grid;grid-template-columns:240px minmax(0,1fr) 64px;gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid #e0e0e0}
+.bar{height:10px;background:#e8e8e8;position:relative}
+.bar>span{position:absolute;left:0;top:0;bottom:0;background:#1E3BD6}
+.bar>i{position:absolute;top:-5px;bottom:-5px;width:2px;background:#111}
+.rec{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid #e0e0e0;color:#111}
+.rec:hover{background:#f6f6f6;text-decoration:none;color:#111}
+@media (max-width:900px){.wrap{padding:0 16px}.dim{grid-template-columns:minmax(0,1fr)}.h2{font-size:30px}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:80px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:34px}}
+</style>
+</head>
+<body>
+<div style="width:100%;background:#fff">
+
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="main-logo.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+
+<section class="narrow" style="padding-top:48px">
+<div class="ann">01 · Шаг анкеты — без&nbsp;меню, одна задача на&nbsp;экране</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px"><span class="lbl">Вопрос 4 из&nbsp;12</span><span class="lbl">≈ 10 минут осталось</span></div>
+<div style="height:4px;background:#e8e8e8;margin-top:12px;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:33%;background:#1E3BD6"></span></div>
+<div class="lbl" style="margin-top:40px">Блок 2 · Резервные копии</div>
+<h1 style="margin:12px 0 0;font-size:36px;line-height:1.2;font-weight:600">Если&nbsp;атакующий получит права администратора домена, сможет ли он удалить или&nbsp;зашифровать ваши резервные копии?</h1>
+<p style="font-size:16px;color:#5c5c5c;margin:16px 0 0;line-height:1.5">Подумайте о&nbsp;копиях критичных систем: ERP, биллинга, каналов продаж.</p>
+<fieldset style="border:0;padding:0;margin:32px 0 0;display:flex;flex-direction:column;gap:12px">
+<legend style="position:absolute;left:-9999px">Варианты ответа</legend>
+<label class="opt"><input type="radio" name="q4">Да, копии доступны из&nbsp;основной сети</label>
+<label class="opt opt-on"><input type="radio" name="q4" checked="">Часть копий изолирована, но&nbsp;не&nbsp;все критичные системы</label>
+<label class="opt"><input type="radio" name="q4">Нет, копии в&nbsp;изолированном контуре и&nbsp;неизменяемы</label>
+<label class="opt"><input type="radio" name="q4">Не&nbsp;знаю</label>
+</fieldset>
+<details style="margin-top:20px;font-size:15px"><summary style="cursor:pointer;color:#1E3BD6;font-weight:500">Почему мы спрашиваем</summary><p style="color:#333;line-height:1.55;margin:10px 0 0">Злоумышленники заранее идут к&nbsp;резервным копиям, чтобы восстанавливаться было не&nbsp;из&nbsp;чего. При&nbsp;этом почти половина компаний нарушает правило «3-2-1», а&nbsp;каждая четвёртая ни&nbsp;разу не&nbsp;восстанавливалась из&nbsp;резервной копии.</p></details>
+<div style="display:flex;justify-content:space-between;gap:12px;margin-top:40px;flex-wrap:wrap"><button class="btn" type="button">← Назад</button><button class="btn btn-p" type="button">Далее →</button></div>
+</section>
+
+<div style="margin:120px 0 0;height:16px;background:#f4f4f4;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3"></div>
+
+<section class="wrap" style="padding-top:64px">
+<div class="ann">02 · Результат — профиль, сравнение, три шага</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;align-items:flex-end">
+<div style="flex:1 1 560px;min-width:0"><div class="lbl">Ваш результат · Киберустойчивость</div><h2 class="h2" style="margin-top:12px;font-size:48px">Вы восстановитесь примерно за <span class="mark">22 дня</span></h2><p style="font-size:18px;line-height:1.5;color:#333;margin:16px 0 0;max-width:640px">Столько в&nbsp;среднем восстанавливались 20 компаний, которые мы поднимали после атак в&nbsp;2025 году. Основная причина — резервные копии доступны атакующему.</p></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" type="button">Скачать PDF для&nbsp;руководства</button><button class="btn" type="button">Отправить коллеге</button></div>
+</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;margin-top:48px">
+<div style="flex:1 1 640px;min-width:0;border-top:1px solid #111">
+<div style="display:flex;justify-content:flex-end;gap:20px;padding:10px 0;font-size:13px;color:#5c5c5c"><span><span style="display:inline-block;width:10px;height:10px;background:#1E3BD6;margin-right:6px"></span>Вы</span><span><span style="display:inline-block;width:2px;height:12px;background:#111;margin-right:6px;vertical-align:middle"></span>Медиана отрасли</span></div>
+<div class="dim"><span style="font-weight:500">Резервные копии</span><div class="bar"><span style="width:30%"></span><i style="left:55%"></i></div><span class="serif" style="font-weight:700;text-align:right">30</span></div>
+<div class="dim"><span style="font-weight:500">План восстановления</span><div class="bar"><span style="width:45%"></span><i style="left:50%"></i></div><span class="serif" style="font-weight:700;text-align:right">45</span></div>
+<div class="dim"><span style="font-weight:500">Сегментация сети</span><div class="bar"><span style="width:62%"></span><i style="left:48%"></i></div><span class="serif" style="font-weight:700;text-align:right">62</span></div>
+<div class="dim"><span style="font-weight:500">Доступ подрядчиков</span><div class="bar"><span style="width:25%"></span><i style="left:40%"></i></div><span class="serif" style="font-weight:700;text-align:right">25</span></div>
+<div class="dim"><span style="font-weight:500">Мониторинг</span><div class="bar"><span style="width:70%"></span><i style="left:60%"></i></div><span class="serif" style="font-weight:700;text-align:right">70</span></div>
+<div class="dim"><span style="font-weight:500">Учения</span><div class="bar"><span style="width:15%"></span><i style="left:35%"></i></div><span class="serif" style="font-weight:700;text-align:right">15</span></div>
+
+</div>
+<div style="flex:1 1 380px;min-width:0">
+<div class="lbl" style="color:#111;padding-bottom:10px;border-bottom:2px solid #111">С&nbsp;чего начать</div>
+<a class="rec" href="architecture-copy.html"><span><span class="serif num" style="font-size:24px;margin-right:12px">1</span><b>Изолировать резервные копии</b></span><span aria-hidden="true">→</span></a>
+<a class="rec" href="architecture-copy.html"><span><span class="serif num" style="font-size:24px;margin-right:12px">2</span><b>Закрыть доступ подрядчиков</b></span><span aria-hidden="true">→</span></a>
+<a class="rec" href="architecture-copy.html"><span><span class="serif num" style="font-size:24px;margin-right:12px">3</span><b>Провести учение с&nbsp;правлением</b></span><span aria-hidden="true">→</span></a>
+<div style="background:#1E3BD6;color:#fff;padding:28px;margin-top:32px"><div style="font-weight:600;font-size:20px">Разобрать результат с&nbsp;экспертом</div><p style="font-size:15px;color:#eef1ff;margin:8px 0 0;line-height:1.5">30 минут, бесплатно. Эксперт увидит ваши ответы заранее.</p><a class="btn btn-l" href="contacts-copy.html" style="margin-top:16px">Записаться</a></div>
+</div>
+</div>
+</section>
+
+<div style="height:120px"></div>
+</div>
+</body>
+</html>

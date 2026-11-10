@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Макеты — борд</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand"><span class="dot"></span> Макеты</div>
+    <div id="count" class="pill">0</div>
+    <label class="chk">страница
+      <select id="pageMode">
+        <option value="2" selected>Страница 2</option>
+        <option value="1">Страница 1</option>
+        <option value="all">все</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <div class="hint">колесо — зум · пробел + перетаскивание — панорама · 0 — вписать</div>
+    <div class="zoom">
+      <button data-act="zoom-out" title="Уменьшить">−</button>
+      <span id="zoomLabel">100%</span>
+      <button data-act="zoom-in" title="Увеличить">+</button>
+      <button data-act="fit" title="Вписать всё" class="wide">Вписать</button>
+      <button data-act="reset" title="Масштаб 100%">100%</button>
+    </div>
+  </header>
+
+  <div id="main">
+    <aside id="sidebar">
+      <div class="side-title">Экраны</div>
+      <input id="search" class="search" type="search" placeholder="Поиск по названию…" autocomplete="off">
+      <ul id="framesList"></ul>
+      <div id="emptyHint">Положите макеты в рабочую папку — они появятся здесь автоматически.</div>
+    </aside>
+
+    <section id="stage">
+      <div id="canvas"></div>
+      <div id="stageEmpty">
+        <div>
+          <div class="big">Холст пока пуст</div>
+          <div class="small">HTML-страницы и изображения из рабочей папки появятся здесь сами</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="statusbar">
+    <span id="statusText">загрузка…</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Услуги и решения — каталог</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:ital,wght@1,400&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#f1f1f1;display:flex;align-items:center;justify-content:center;text-align:center;color:#6b6b6b;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;box-sizing:border-box;border-radius:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.btn-w{background:#fff;color:#1E3BD6;border-color:#fff}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.g2,.g3,.g4{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sec{padding-top:110px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-top:1px solid #111;padding-top:20px}
+.h1{margin:0;font-size:48px;line-height:1.1;font-weight:500;letter-spacing:-.015em}
+.h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:16px 0 0;max-width:680px}
+.more{font-size:15px;font-weight:500;white-space:nowrap}
+.box{display:flex;flex-direction:column;gap:12px;padding:24px;border:1px solid #d6d6d6;border-radius:4px;background:#fff;color:#111;box-sizing:border-box}
+a.box:hover{border-color:#111;color:#111}
+.num{font-size:40px;line-height:1;font-weight:700;color:#1E3BD6;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.cap{font-size:13px;line-height:1.4;color:#5c5c5c}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.t20{font-size:19px;line-height:1.35;font-weight:600}
+.t15{font-size:15px;line-height:1.5;color:#3a3a3a;margin:0}
+.step{border-top:2px solid #111;padding-top:16px}
+.quote{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.4;margin:0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e3e3e3;color:#111;font-size:17px}
+a.row:hover{color:#1E3BD6}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 28px;padding:12px 0;font-size:14px}
+.rubr-in a{color:#111;padding:4px 0;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.blue{background:#1E3BD6;color:#fff;border-radius:4px}
+@media (max-width:900px){.wrap{padding:0 16px}.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:36px}.h2{font-size:28px}.hide-m{display:none}.sec{padding-top:80px}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:84px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:32px}}
+</style>
+</head>
+<body>
+<div style="width:100%;background:#fff">
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="Main.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики"><div class="wrap rubr-in">
+<a href="Main.html">Главное</a><a href="hub-kiber.html">Киберустойчивость</a><a href="hub-ai.html">ИИ</a><a href="hub-containers.html">Контейнеры и open source</a><a href="hub-import.html">Импортонезависимость</a><a href="hub-decentral.html">Децентрализация</a><a href="hub-dc.html">Свои ЦОД</a><a href="diagnostics.html" style="color:#5c5c5c">Диагностика</a><a href="projects.html" style="color:#5c5c5c">Проекты</a><a href="expertise.html" style="color:#5c5c5c">Центр экспертизы</a>
+</div></nav>
+
+<section class="wrap" style="padding-top:32px">
+<div class="cap"><a href="Main.html" style="color:#5c5c5c">Главная</a> / <span style="color:#111">Услуги и решения</span></div>
+<h1 class="h1" style="margin-top:32px">Услуги и решения</h1>
+<p class="lead">Каждая услуга помечена вызовом, на который она отвечает. 13 направлений, 1000+ проектов в год.</p>
+<div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;align-items:center"><a class="box" href="search.html" style="flex:1 1 520px;padding:14px 18px;flex-direction:row;color:#5c5c5c">Поиск по каталогу…</a></div>
+<div class="cap" style="margin-top:12px">Часто ищут: <a href="hacked.html">восстановление после атаки</a> · <a href="service.html">частные облака</a> · <a href="service.html">DevSecOps</a> · <a href="service.html">модульный ЦОД</a></div>
+</section>
+<section class="wrap" style="padding-top:56px"><div style="display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap">
+<aside style="flex:0 0 240px;position:sticky;top:72px"><div class="lbl" style="color:#111">Вызов</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font-size:15px">
+<a href="hub-kiber.html" style="color:#111">Киберустойчивость</a>
+<a href="hub-ai.html" style="color:#111">ИИ</a>
+<a href="hub-containers.html" style="color:#111">Контейнеры и open source</a>
+<a href="hub-import.html" style="color:#111">Импортонезависимость</a>
+<a href="hub-decentral.html" style="color:#111">Децентрализация</a>
+<a href="hub-dc.html" style="color:#111">Свои ЦОД</a>
+</div><div class="lbl" style="color:#111;margin-top:32px">Формат</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font-size:15px;color:#111"><span>Проект</span><span>Сервис по подписке</span><span>Обследование</span></div></aside>
+<div style="flex:1 1 640px;min-width:0"><div class="cap">22 услуг · все вызовы</div>
+<div class="sh" style="margin-top:32px"><div class="t20">Информационная безопасность</div><a href="direction.html" class="more">Всё направление →</a></div>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Безопасность инфраструктуры</b><span class="t15">Виртуализация, серверы, СУБД, рабочие станции и почта под защитой.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Сетевая безопасность</b><span class="t15">Межсетевые экраны, сегментация и контроль трафика — с испытаниями NGFW.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Защита конечных точек</b><span class="t15">Рабочие места и серверы: от антивируса до EDR.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Управление доступом</b><span class="t15">Права сотрудников и подрядчиков под контролем, в том числе на IDM Jet Identity Master.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Автоматизированное управление и мониторинг ИБ</b><span class="t15">SOC-процессы, SIEM и автоматизация реагирования.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Безопасность облачных сред</b><span class="t15">Защита частных, гибридных и публичных облаков.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Контейнеры и open source</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Защита ИИ</b><span class="t15">Безопасность моделей, данных и ИИ-агентов.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">ИИ</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Комплексная защита АСУ ТП</b><span class="t15">Промышленные сети и КИИ: от аудита до эксплуатации.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Децентрализация</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Экспертный консалтинг по ИБ</b><span class="t15">Аудит, оценка соответствия, стратегия ИБ.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="hacked.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Мониторинг и реагирование — Jet CSIRT</b><span class="t15">Расследуем атаки и восстанавливаем системы: 100+ систем после кибератак.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<div class="sh" style="margin-top:32px"><div class="t20">ИТ-инфраструктура и облака</div><a href="direction.html" class="more">Всё направление →</a></div>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Частные и гибридные облака</b><span class="t15">Отказоустойчивые платформы on-premise и в облаке.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Децентрализация</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">СУБД</b><span class="t15">Миграция, сопровождение и отказоустойчивость баз данных.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span> <span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Контейнеры и open source</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">DevSecOps</b><span class="t15">Безопасная разработка, контейнеры и платформы CI/CD.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Контейнеры и open source</span></span></span><span aria-hidden="true">→</span></a>
+<div class="sh" style="margin-top:32px"><div class="t20">Сети, коммуникации, ЦОД</div><a href="direction.html" class="more">Всё направление →</a></div>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Сети передачи данных ЦОД</b><span class="t15">Фабрики ЦОД, в том числе сегменты под ИИ.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Свои ЦОД</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Сервис инженерных систем ЦОД</b><span class="t15">Техподдержка электропитания, охлаждения и безопасности ЦОД.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Свои ЦОД</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Корпоративные системы IP-телефонии</b><span class="t15">Голосовая связь на российских платформах.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">PoC и MC-PTT</b><span class="t15">Профессиональная радиосвязь поверх сетей LTE/5G.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Децентрализация</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Системы позиционирования персонала и техники</b><span class="t15">Где люди и машины — на промышленной площадке в реальном времени.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Децентрализация</span></span></span><span aria-hidden="true">→</span></a>
+<div class="sh" style="margin-top:32px"><div class="t20">Сервис, данные и бизнес-приложения</div><a href="direction.html" class="more">Всё направление →</a></div>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Управление ИТ-сервисами (ITSM)</b><span class="t15">Процессы поддержки и каталог услуг ИТ.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Управление информационными активами</b><span class="t15">Инвентаризация и учёт ИТ-ресурсов.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Киберустойчивость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Системы электронного документооборота</b><span class="t15">СЭД и ECM на российском ПО.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">Импортонезависимость</span></span></span><span aria-hidden="true">→</span></a>
+<a class="row" href="service.html" style="align-items:flex-start"><span style="display:flex;flex-direction:column;gap:6px"><b style="font-weight:600">Управленческий учёт</b><span class="t15">Планирование и отчётность вместо таблиц Excel.</span><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="lbl" style="border:1px solid #d6d6d6;border-radius:4px;padding:2px 8px">ИИ</span></span></span><span aria-hidden="true">→</span></a>
+</div></div></section>
+<section class="wrap sec"><div class="blue" style="padding:56px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap"><div style="flex:1 1 520px;min-width:0"><h2 class="h2" style="color:#fff">Не нашли нужное?</h2><p class="lead" style="color:#eef1ff">Опишите задачу — подскажем, с чего начать. Ещё направления: обучение и киберучения, управление данными, ML и ИИ, цифровое рабочее место, собственные продукты.</p></div><a class="btn btn-l" href="contacts.html">Описать задачу</a></div></section>
+<!-- Подвал -->
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai.html" style="color:#fff">ИИ</a><a href="hub-containers.html" style="color:#fff">Контейнеры и open source</a><a href="hub-import.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral.html" style="color:#fff">Децентрализация</a><a href="hub-dc.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog.html" style="color:#fff">Услуги и решения</a><a href="industry.html" style="color:#fff">По отраслям</a><a href="diagnostics.html" style="color:#fff">Диагностика</a><a href="projects.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about.html" style="color:#fff">О компании</a><a href="method.html" style="color:#fff">Как мы работаем</a><a href="expertise.html" style="color:#fff">Центр экспертизы</a><a href="career.html" style="color:#fff">Карьера</a><a href="press.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts.html" style="color:#fff">Контакты и офисы</a><a href="contacts.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

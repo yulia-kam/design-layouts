@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вызовы — обзор</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:ital,wght@1,400&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#f1f1f1;display:flex;align-items:center;justify-content:center;text-align:center;color:#6b6b6b;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;box-sizing:border-box;border-radius:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.btn-w{background:#fff;color:#1E3BD6;border-color:#fff}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.g2,.g3,.g4{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sec{padding-top:110px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-top:1px solid #111;padding-top:20px}
+.h1{margin:0;font-size:48px;line-height:1.1;font-weight:500;letter-spacing:-.015em}
+.h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:16px 0 0;max-width:680px}
+.more{font-size:15px;font-weight:500;white-space:nowrap}
+.box{display:flex;flex-direction:column;gap:12px;padding:24px;border:1px solid #d6d6d6;border-radius:4px;background:#fff;color:#111;box-sizing:border-box}
+a.box:hover{border-color:#111;color:#111}
+.num{font-size:40px;line-height:1;font-weight:700;color:#1E3BD6;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.cap{font-size:13px;line-height:1.4;color:#5c5c5c}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.t20{font-size:19px;line-height:1.35;font-weight:600}
+.t15{font-size:15px;line-height:1.5;color:#3a3a3a;margin:0}
+.step{border-top:2px solid #111;padding-top:16px}
+.quote{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.4;margin:0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e3e3e3;color:#111;font-size:17px}
+a.row:hover{color:#1E3BD6}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 28px;padding:12px 0;font-size:14px}
+.rubr-in a{color:#111;padding:4px 0;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.blue{background:#1E3BD6;color:#fff;border-radius:4px}
+@media (max-width:900px){.wrap{padding:0 16px}.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:36px}.h2{font-size:28px}.hide-m{display:none}.sec{padding-top:80px}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:80px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:34px}}
+</style>
+</head>
+<body>
+<div style="width:100%;background:#fff">
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="main-logo.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики"><div class="wrap rubr-in">
+<a href="main-logo.html">Главное</a><a href="hub-kiber-copy-1.html">Киберустойчивость</a><a href="hub-ai-copy-1.html">ИИ</a><a href="hub-containers-copy-1.html">Контейнеры и&nbsp;open source</a><a href="hub-import-copy-1.html">Импортонезависимость</a><a href="hub-decentral-copy-1.html">Децентрализация</a><a href="hub-dc-copy-1.html">Свои ЦОД</a><a href="diagnostics-copy.html" style="color:#5c5c5c">Диагностика</a><a href="projects-copy.html" style="color:#5c5c5c">Проекты</a><a href="expertise-copy.html" style="color:#5c5c5c">Центр экспертизы</a>
+</div></nav>
+
+<section class="wrap" style="padding-top:32px">
+<div class="cap"><a href="main-logo.html" style="color:#5c5c5c">Главная</a> / <span style="color:#111">Вызовы</span></div>
+<h1 class="h1" style="margin-top:32px;max-width:1000px">Шесть вызовов, с&nbsp;которыми<br><span class="mark">крупный бизнес приходит к&nbsp;нам</span></h1>
+<p class="lead">Мы говорим о&nbsp;проблемах, а&nbsp;не&nbsp;о&nbsp;продуктах. Каждая страница вызова начинается с&nbsp;проверочного вопроса руководителю и&nbsp;заканчивается доказательствами: проектами, стендами, цифрами. Киберустойчивость — ключевая задача ИТ-бюджета для&nbsp;49% компаний и&nbsp;первое место во&nbsp;всех отраслях.</p>
+</section>
+<section class="wrap" style="padding-top:56px"><div class="g3">
+<a class="box" href="hub-kiber-copy-1.html" style="border:2px solid #111"><div class="lbl">Киберустойчивость</div><div class="t20" style="min-height:78px">Шифровальщик остановит бизнес на&nbsp;недели. Резервные копии он уничтожит первыми.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">22 дня</div><div class="cap" style="margin-top:6px">в&nbsp;среднем занимало восстановление ключевых систем у&nbsp;20 компаний, которые мы поднимали после атак в&nbsp;2025 году</div></div><div class="cap">Эксперт: Андрей Янкин</div><div class="ans">Открыть вызов →</div></a>
+<a class="box" href="hub-ai-copy-1.html" style="border:2px solid #111"><div class="lbl">ИИ в&nbsp;инфраструктуре и&nbsp;бизнесе</div><div class="t20" style="min-height:78px">Ваш ИИ-пилот, скорее всего, не&nbsp;доживёт до&nbsp;прода. И&nbsp;дело не&nbsp;в&nbsp;модели.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">до&nbsp;60%</div><div class="cap" style="margin-top:6px">ИИ-проектов останавливаются на&nbsp;стадии пилота — опыт Джет</div></div><div class="cap">Эксперт: Максим Андрианов</div><div class="ans">Открыть вызов →</div></a>
+<a class="box" href="hub-containers-copy-1.html" style="border:2px solid #111"><div class="lbl">Контейнеры и&nbsp;open source</div><div class="t20" style="min-height:78px">В&nbsp;Kubernetes упал open source-компонент. У&nbsp;него нет вендора — ночью никто не&nbsp;ответит.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">полгода → недели</div><div class="cap" style="margin-top:6px">столько стал занимать вывод функций в&nbsp;банке после перехода на&nbsp;платформу</div></div><div class="cap">Эксперт: Дмитрий Горохов</div><div class="ans">Открыть вызов →</div></a>
+<a class="box" href="hub-import-copy-1.html" style="border:2px solid #111"><div class="lbl">Импортонезависимость</div><div class="t20" style="min-height:78px">Российский стек куплен по&nbsp;реестру. Вместе он не&nbsp;работает.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">×4</div><div class="cap" style="margin-top:6px">выросло число наших проектов по&nbsp;переходу на&nbsp;российские продукты с&nbsp;2022 года</div></div><div class="cap">Эксперт: Павел Тесленко</div><div class="ans">Открыть вызов →</div></a>
+<a class="box" href="hub-decentral-copy-1.html" style="border:2px solid #111"><div class="lbl">Децентрализация</div><div class="t20" style="min-height:78px">Потеряете главный ЦОД — остановится бизнес. Резервный упадёт вместе с&nbsp;ним.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">2030</div><div class="cap" style="margin-top:6px">концепция «Инфраструктура 2030»: децентрализация, изменчивость, пересоздание вместо восстановления</div></div><div class="cap">Эксперт: Юрий Семенюков</div><div class="ans">Открыть вызов →</div></a>
+<a class="box" href="hub-dc-copy-1.html" style="border:2px solid #111"><div class="lbl">Свои ЦОД</div><div class="t20" style="min-height:78px">Электричество в&nbsp;Москве почти закончилось. Под&nbsp;ваш ИИ мощности может не&nbsp;найтись.</div><div style="margin-top:auto;padding-top:16px;border-top:1px solid #e3e3e3"><div class="num">~30%</div><div class="cap" style="margin-top:6px">бюджета ЦОДа — кондиционирование; с&nbsp;лета 2026 оно есть в&nbsp;реестре Минпромторга</div></div><div class="cap">Эксперт: Всеволод Воробьёв</div><div class="ans">Открыть вызов →</div></a>
+</div></section>
+<section class="wrap sec"><div class="sh"><div><div class="lbl" style="color:#111">С&nbsp;чего начать</div><h2 class="h2">По&nbsp;вашей роли</h2></div></div>
+<div class="g3" style="margin-top:40px">
+<div class="step"><div class="t20">Генеральный директор</div><p class="t15" style="margin-top:8px">Сколько бизнес простоит после атаки и&nbsp;сколько это&nbsp;стоит. Цель 76% атак — остановить бизнес.</p><div style="display:flex;flex-direction:column;gap:6px;margin-top:12px"><a href="hub-kiber-copy-1.html" class="ans">Киберустойчивость →</a><a href="hub-decentral-copy-1.html" class="ans">Децентрализация →</a></div></div>
+<div class="step"><div class="t20">ИТ-директор</div><p class="t15" style="margin-top:8px">На&nbsp;чём строить инфраструктуру на&nbsp;5 лет. Актуальная ИТ-стратегия есть лишь у&nbsp;47% компаний.</p><div style="display:flex;flex-direction:column;gap:6px;margin-top:12px"><a href="hub-import-copy-1.html" class="ans">Импортонезависимость →</a><a href="hub-containers-copy-1.html" class="ans">Контейнеры и&nbsp;open source →</a><a href="hub-dc-copy-1.html" class="ans">Свои ЦОД →</a></div></div>
+<div class="step"><div class="t20">Директор по&nbsp;ИБ</div><p class="t15" style="margin-top:8px">Как&nbsp;защитить то, что&nbsp;уже меняется. В&nbsp;I полугодии 2026 года 69% инцидентов Jet CSIRT — шифровальщики.</p><div style="display:flex;flex-direction:column;gap:6px;margin-top:12px"><a href="hub-kiber-copy-1.html" class="ans">Киберустойчивость →</a><a href="hub-ai-copy-1.html" class="ans">ИИ и&nbsp;его защита →</a></div></div>
+</div></section>
+<section class="wrap sec"><div class="sh"><div><div class="lbl" style="color:#111">Связи</div><h2 class="h2">Вызовы не&nbsp;живут по&nbsp;отдельности</h2><p class="lead">Контейнеры меняют требования к&nbsp;площадкам, импортонезависимость — к&nbsp;защите, ИИ — к&nbsp;ЦОДу: больше 30% компаний уже выделили в&nbsp;ЦОДе сетевой сегмент под&nbsp;ИИ.</p></div></div>
+<div class="ph" style="height:320px;margin-top:40px">[схема: шесть вызовов и&nbsp;связи между ними — кликабельная]</div></section>
+<section class="wrap sec"><div class="blue" style="padding:56px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap"><div style="flex:1 1 520px;min-width:0"><h2 class="h2" style="color:#fff">Не&nbsp;знаете, с&nbsp;чего начать?</h2><p class="lead" style="color:#eef1ff">Самооценка покажет, какие вызовы острее для&nbsp;вашей компании.</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-l" href="self-assessment-copy.html">Пройти самооценку</a><a class="btn btn-w" href="contacts-copy.html">Поговорить с&nbsp;экспертом</a></div></div></section>
+<!-- Подвал -->
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber-copy-1.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai-copy-1.html" style="color:#fff">ИИ</a><a href="hub-containers-copy-1.html" style="color:#fff">Контейнеры и&nbsp;open source</a><a href="hub-import-copy-1.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral-copy-1.html" style="color:#fff">Децентрализация</a><a href="hub-dc-copy-1.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog-copy.html" style="color:#fff">Услуги и&nbsp;решения</a><a href="industry-copy.html" style="color:#fff">По&nbsp;отраслям</a><a href="diagnostics-copy.html" style="color:#fff">Диагностика</a><a href="projects-copy.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about-copy.html" style="color:#fff">О&nbsp;компании</a><a href="method-copy.html" style="color:#fff">Как&nbsp;мы работаем</a><a href="expertise-copy.html" style="color:#fff">Центр экспертизы</a><a href="career-copy.html" style="color:#fff">Карьера</a><a href="press-copy.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked-copy.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts-copy.html" style="color:#fff">Контакты и&nbsp;офисы</a><a href="contacts-copy.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

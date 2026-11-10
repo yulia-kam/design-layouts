@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — Киберустойчивость, часть 2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{display:flex;flex-direction:column;gap:10px;border-top:2px solid #1E3BD6;padding-top:16px;box-sizing:border-box}
+.fact .num{font-size:32px;color:#1E3BD6}
+.fact .ft{font-size:15px;line-height:1.5;color:#3a3a3a}
+.fact .src{margin-top:auto;padding-top:4px;font-size:10px}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff;transition:background .15s}
+.field input:hover,.field textarea:hover{background:#f1f1f1}
+.field input:focus,.field textarea:focus{background:#fff}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:10px 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:4px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (min-width:901px){.secnav{justify-content:space-between!important;gap:16px!important}}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:10px 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 140px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:14px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:17px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:28px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;justify-content:flex-end;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px;transition:border-color .15s}
+.hx-ci:hover i{border-color:#1E3BD6}
+.hx-ci{cursor:pointer;position:relative}
+.hx-cb{position:absolute;opacity:0;width:22px;height:22px;margin:0;left:0;top:17px;cursor:pointer}
+.hx-ci i{position:relative;box-sizing:border-box;transition:border-color .15s,background .15s}
+.hx-cb:checked+i{background:#1E3BD6;border-color:#1E3BD6}
+.hx-cb:checked+i::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.hx-cb:focus-visible+i{outline:2px solid #1E3BD6;outline-offset:2px}
+.hx-res{align-self:stretch;display:flex;flex-direction:column;gap:12px;background:#111;color:#fff;border:1px solid #111;border-radius:4px;padding:28px;box-sizing:border-box}
+.hx-faq{margin-top:32px;border-top:2px solid #1E3BD6}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";display:inline-block;width:24px;text-align:center;font-weight:400;color:#5c5c5c;transition:transform .25s ease,color .15s}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq summary{transition:color .15s}
+.hx-fq:not([open]) summary:hover{color:#1E3BD6}
+.hx-fq:not([open]) summary:hover::after{color:#1E3BD6;transform:scale(1.3)}
+.hx-fq[open] summary:hover::after{color:#1E3BD6}
+@media (prefers-reduced-motion:reduce){.hx-fq summary::after{transition:none}}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:84px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:32px}}
+.mg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}
+.mc{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid #d6d6d6;border-radius:4px;background:#fff;box-sizing:border-box}
+.mc .mq{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:23px;line-height:1.25;margin:0;color:#111}
+.mc .mf{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.mc .mv{font-size:32px;line-height:1;font-weight:700;color:#1E3BD6;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.mc .mt{font-size:14.5px;line-height:1.45;color:#3a3a3a;margin:0}
+.hx-cl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;align-content:start}
+@media (max-width:600px){.hx-cl{grid-template-columns:minmax(0,1fr)}}
+.mc-cta{background:#1E3BD6;border-color:#1E3BD6;color:#fff;gap:16px}
+@media (max-width:1100px){.mg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.mg{grid-template-columns:minmax(0,1fr)}}
+.st{list-style:none;margin:40px 0 0;padding:0}
+.st li{position:relative}
+.st li:not(:last-child)::before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:#1E3BD6}
+.st-i{display:grid;grid-template-columns:44px minmax(0,1.5fr) minmax(0,1fr) 24px;gap:32px;align-items:start;padding:0 0 32px;color:#111}
+.st-i:hover{text-decoration:none;color:#111}
+.st li:last-child .st-i{padding-bottom:0}
+.svc-g>.svc:nth-child(-n+2){border-top:2px solid #1E3BD6}
+@media (max-width:600px){.svc-g>.svc:nth-child(2){border-top:0}}
+.st li:not(:last-child)::after{content:"";position:absolute;left:21px;top:44px;width:2px;height:32px;background:linear-gradient(to bottom,rgba(212,245,60,0),#D4F53C 50%,rgba(212,245,60,0));opacity:0;z-index:0;animation:st-flow 9s ease-in-out infinite}
+.st-n{animation:st-ping 9s ease-out infinite;transition:background .2s,color .2s}
+.st-i:hover .st-n{background:#1E3BD6;color:#fff}
+.st li:nth-child(2) .st-n,.st li:nth-child(2)::after{animation-delay:1.5s}
+.st li:nth-child(3) .st-n,.st li:nth-child(3)::after{animation-delay:3s}
+.st li:nth-child(4) .st-n,.st li:nth-child(4)::after{animation-delay:4.5s}
+.st li:nth-child(5) .st-n,.st li:nth-child(5)::after{animation-delay:6s}
+.st li:nth-child(6) .st-n{animation-delay:7.5s}
+@keyframes st-ping{0%{background:#1E3BD6;color:#fff;box-shadow:0 0 0 0 rgba(30,59,214,.35)}7%{box-shadow:0 0 0 12px rgba(30,59,214,0)}10%{background:#1E3BD6;color:#fff}14%,100%{background:#fff;color:#1E3BD6;box-shadow:0 0 0 0 rgba(30,59,214,0)}}
+@keyframes st-flow{0%,2%{top:44px;opacity:0}4%{opacity:1}15%{top:calc(100% - 32px);opacity:1}16.5%,100%{top:calc(100% - 32px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.st-n,.st li::after{animation:none!important}}
+.st-i:hover .st-t,.st-i:hover .st-a{color:#1E3BD6}
+.st-n{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;border:2px solid #1E3BD6;background:#fff;color:#1E3BD6;display:flex;align-items:center;justify-content:center;font:600 14px 'IBM Plex Mono',monospace;box-sizing:border-box}
+.st-p{color:#1E3BD6}
+.st-t{font-size:21px;font-weight:600;line-height:1.3;margin-top:6px}
+.st-d{font-size:15px;line-height:1.5;color:#333;margin:8px 0 0}
+.st-w{padding-top:2px}
+.st-w p{font-size:15px;line-height:1.45;margin:6px 0 0;color:#111}
+.st-a{font-size:20px;color:#5c5c5c;padding-top:8px}
+@media (max-width:900px){.st-i{grid-template-columns:44px minmax(0,1fr);gap:12px 20px}.st-w{grid-column:2}.st-a{display:none}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+
+<section id="services" class="wrap sec">
+<div class="ann">05 · Чем реализуем&nbsp;— услуги из&nbsp;каталога</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-top:1px solid #111;padding-top:20px"><div><div class="lbl" style="color:#111">Инструменты</div><h2 class="h2" style="margin-top:8px">Чем реализуем</h2></div><a href="#" style="font-size:15px;font-weight:500">Весь каталог →</a></div>
+<div class="g2 svc-g" style="margin-top:32px;gap:0 48px">
+<a class="svc" href="#">Восстановление ИТ-инфраструктуры после атаки<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Мониторинг и&nbsp;реагирование&nbsp;— Jet CSIRT<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Системы резервного копирования и&nbsp;восстановления<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Катастрофоустойчивые решения<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Обследование DR-планов и&nbsp;непрерывности бизнеса<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Управление доступом и&nbsp;IDM<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Тестирование на&nbsp;проникновение<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Киберучения&nbsp;— Jet CyberCamp<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<section id="proof" class="wrap sec">
+<div class="ann">06 · Доказательства: проекты и&nbsp;стенды</div>
+<div class="hx-sh"><div class="lbl">Практика</div><h2 class="h2" style="margin-top:8px">Доказательства</h2></div>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="lbl">Банк · DR-тренинг</div><div class="serif num" style="font-size:52px;white-space:nowrap">4 ч → 3 сут.</div><div style="font-size:17px;line-height:1.4">Регламент обещал четыре часа, учения показали трое суток. Разрывы закрыли<br>за&nbsp;6 млн ₽&nbsp;— против 180 млн ₽ потенциальных потерь</div><span class="ans">Подробнее →</span></a>
+<a class="card" href="project.html"><div class="lbl">Банк · Мониторинг · Проект</div><div class="serif num" style="font-size:52px;white-space:nowrap">~1000</div><div style="font-size:17px;line-height:1.4">сервисов банка под&nbsp;сквозным APM-мониторингом&nbsp;— без&nbsp;наблюдаемости не&nbsp;расследовать инцидент</div><span class="ans">Подробнее →</span></a>
+<a class="card" href="#"><div class="lbl">Расследование · Финсектор</div><div class="serif num" style="font-size:52px;white-space:nowrap">1 учётка</div><div style="font-size:17px;line-height:1.4">подрядчика открыла злоумышленникам путь к&nbsp;домену клиента. Разбор атаки по&nbsp;шагам и&nbsp;что&nbsp;изменили после</div><span class="ans">Разбор →</span></a>
+</div>
+</section>
+
+<section id="case" class="wrap sec"><div class="hx-sh"><div class="lbl">Разбор кейса</div><h2 class="hx-h2">Регламент обещал четыре часа.<br>Тренинг показал трое суток.</h2></div><div class="hx-case"><div class="l"><div class="lbl">Банк · DR-тренинг</div><div class="hx-part"><div class="lbl">Задача</div><p>Целевое время восстановления ключевых систем в&nbsp;регламентах банка&nbsp;— 4 часа.&nbsp;<br>На&nbsp;эту цифру опирались и&nbsp;ИТ, и&nbsp;бизнес.</p></div><div class="hx-part"><div class="lbl">Что&nbsp;сделали</div><p>Провели полноценный DR-тренинг вместо настольных учений: реальное восстановление по&nbsp;сценарию серьёзного инцидента, с&nbsp;замером времени на&nbsp;каждом шаге.</p></div><div class="hx-part"><div class="lbl">Результат</div><p>Часть копий оказалась повреждена, инструкции не&nbsp;совпадали с&nbsp;конфигурацией, порядок запуска взаимозависимых сервисов не&nbsp;был отработан. Банк вложил около 6 млн ₽ в&nbsp;защиту копий и&nbsp;актуализацию регламентов.</p></div></div><div class="rr"><div><div class="num">~3 сут.</div><div class="c">реальное восстановление вместо 4 часов</div></div><div><div class="num">15 млн ₽</div><div class="c">стоимость часа простоя ключевых систем</div></div><div><div class="num">≈180 млн ₽</div><div class="c">потенциальные потери от&nbsp;трёх дней простоя</div></div></div></div></section>
+<section id="expertise" class="wrap sec">
+<div class="ann">07 · Экспертиза: исследования и&nbsp;мнение</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid #111;padding-top:20px">
+<div style="flex:1 1 560px;min-width:0">
+<div class="lbl" style="color:#111">Знания</div><h2 class="h2" style="margin-top:8px">Экспертиза</h2>
+<div style="margin-top:32px;border-top:2px solid #1E3BD6">
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Хабр · инженерный кейс</span>Третья копия&nbsp;— это&nbsp;хорошо. А&nbsp;где четвёртая?</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">JETINFO · «Непрерывность 2.0»</span>Защита от&nbsp;Минотавра: «Бункер» и&nbsp;«Цитадель»</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Колонка для&nbsp;CEO</span>ИТ-блекаут: как&nbsp;отличить экономию от&nbsp;недофинансирования</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">JETINFO · кейс расследования</span>Кризис доверия: как&nbsp;работать с&nbsp;подрядчиками безопасно</span><span aria-hidden="true">→</span></a>
+</div>
+</div>
+<aside style="flex:0 1 380px">
+<div class="lbl" style="color:#111">Мнение</div>
+<p class="serif" style="font-style:italic;font-size:24px;line-height:1.35;margin:73px 0 0">«Вопрос не&nbsp;в&nbsp;том, сломается&nbsp;<br>ли бизнес, а&nbsp;в&nbsp;том, как&nbsp;быстро он&nbsp;восстановится»</p>
+<div style="display:flex;align-items:center;gap:12px;margin-top:20px"><div style="width:44px;height:44px;border-radius:50%;background:#D4F53C;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">ЮС</div><div style="font-size:14px"><div style="font-weight:600">Юрий Семенюков</div><div style="color:#5c5c5c">директор центра&nbsp;<br>инфраструктурных решений</div></div></div>
+</aside>
+</div>
+</section>
+
+<section class="wrap" style="padding-top:64px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;border-top:1px solid #111;border-bottom:1px solid #111;padding:24px 0">
+<div class="lbl" style="color:#111">Экспертиза как&nbsp;сервис</div>
+<div style="flex:1 1 420px;font-size:18px;font-weight:500">Центр мониторинга и&nbsp;реагирования Jet CSIRT&nbsp;— ваша дежурная смена по&nbsp;подписке.</div>
+<a href="#" style="font-size:15px;font-weight:500">Подробнее →</a>
+</div>
+</section>
+
+<section id="check" class="wrap sec"><div class="hx-sh"><div class="lbl">Самопроверка</div><h2 class="hx-h2">Шесть вопросов, на&nbsp;которые стоит ответить до&nbsp;проекта</h2></div><div class="hx-check"><div class="hx-cl"><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Есть ли утверждённый и&nbsp;актуальный DR-план с&nbsp;инструкциями по&nbsp;каждой критичной системе?</span></label><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Есть ли резервные копии, которые нельзя удалить или&nbsp;зашифровать скомпрометированной учётной записью администратора?</span></label><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Восстанавливали ли вы&nbsp;критичные системы целиком за&nbsp;последние полгода&nbsp;— и&nbsp;уложились ли в&nbsp;заявленное время?</span></label><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Разделены ли основная и&nbsp;резервная среды так, чтобы одна атака не&nbsp;вывела из&nbsp;строя обе площадки и&nbsp;копии?</span></label><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Известна ли стоимость часа простоя ваших критичных систем?</span></label><label class="hx-ci"><input type="checkbox" class="hx-cb"><i aria-hidden="true"></i><span>Определено ли, кто подтверждает чистоту инфраструктуры перед запуском восстановления?</span></label></div><div class="hx-res"><div class="lbl" style="color:#D4F53C">Как&nbsp;читать результат</div><p style="font-size:20px;line-height:1.4;font-weight:500;margin:0;color:#fff">Пять и&nbsp;более ответов «нет»&nbsp;— признак существенных пробелов в&nbsp;аварийном восстановлении.</p><a class="btn btn-l" href="self-assessment.html" style="margin-top:auto;align-self:flex-start">Пройти полную самооценку</a></div></div></section>
+<section id="faq" class="wrap sec"><div class="hx-sh"><div class="lbl">Вопросы</div><h2 class="hx-h2">Частые вопросы</h2></div><div class="hx-faq"><details class="hx-fq" open=""><summary>Чем «Бункер» и&nbsp;«Цитадель» отличаются от&nbsp;резервного ЦОД?</summary><p>Резервный ЦОД обычно связан с&nbsp;основным и&nbsp;попадает в&nbsp;ту же&nbsp;зону поражения. «Бункер»&nbsp;— изолированный контур с&nbsp;проверенными неизменяемыми копиями без&nbsp;постоянной сетевой связности; с&nbsp;однонаправленной репликацией целевое время восстановления&nbsp;— от&nbsp;6–12 часов. «Цитадель»&nbsp;— доверенный ЦОД с&nbsp;уже запущенными критичными системами: целевое время восстановления 4–6 часов.</p></details><details class="hx-fq"><summary>Как&nbsp;часто нужно проверять восстановление?</summary><p>Для&nbsp;бизнес-критичных систем&nbsp;— не&nbsp;реже раза в&nbsp;полгода, и&nbsp;именно практическое восстановление целиком, а&nbsp;не&nbsp;проверку, что&nbsp;файл копии читается.</p></details><details class="hx-fq"><summary>Что&nbsp;такое правило «3-2-1-1-0»?</summary><p>Три копии данных, на&nbsp;двух разных носителях, одна&nbsp;— вне площадки, одна&nbsp;— неизменяемая или&nbsp;в&nbsp;изолированной среде, и&nbsp;ноль ошибок при&nbsp;тестовых восстановлениях.</p></details><details class="hx-fq"><summary>С&nbsp;чего начать, если времени и&nbsp;бюджета мало?</summary><p>С&nbsp;единой команды ИТ и&nbsp;ИБ, инвентаризации активов и&nbsp;многофакторной аутентификации на&nbsp;всём периметре. Первые меры дают эффект за&nbsp;1–3 месяца.</p></details><details class="hx-fq"><summary>Что&nbsp;делать прямо сейчас, если идёт атака?</summary><p>Звонить на&nbsp;горячую линию Jet CSIRT: подключимся, соберём оперативную группу и&nbsp;начнём с&nbsp;локализации.</p></details></div></section>
+<section id="contact" class="wrap sec">
+<div class="ann">08 · Эксперт и&nbsp;форма</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid #111;padding-top:40px">
+<div style="flex:1 1 380px;display:flex;gap:24px;min-width:0;align-self:flex-start">
+<div class="ph" style="flex:0 0 160px;height:160px">[фото эксперта]</div>
+<div style="display:flex;flex-direction:column;min-height:160px"><h2 class="h2" style="font-size:32px">Обсудите вашу ситуацию с&nbsp;экспертом</h2><div style="font-weight:600;margin-top:auto;padding-top:16px">Андрей Янкин</div><div style="font-size:14px;color:#5c5c5c;margin-top:4px">руководитель дирекции&nbsp;<br>информационной безопасности</div></div>
+</div>
+<form style="flex:1 1 480px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<label class="field">Имя<input type="text"></label>
+<label class="field">Компания<input type="text"></label>
+<label class="field">Телефон или&nbsp;e-mail<input type="text"></label>
+<label class="field">Должность<input type="text"></label>
+<label class="field" style="grid-column:1/-1">Когда вы&nbsp;в&nbsp;последний раз восстанавливались из&nbsp;резервной копии?<textarea style="min-height:96px;padding:12px"></textarea></label>
+<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span style="font-size:12px;color:#5c5c5c">Нажимая «Отправить», вы&nbsp;соглашаетесь с&nbsp;политикой обработки данных</span><button class="btn btn-p" type="button">Отправить</button></div>
+</form>
+</div>
+</section>
+
+<section class="wrap sec">
+<div class="ann">09 · Связанные вызовы</div>
+<div class="hx-sh"><div class="lbl" style="color:#111">Другие вызовы</div></div>
+<div class="g3" style="margin-top:20px;row-gap:0">
+<a class="svc" href="hub-ai.html">ИИ в&nbsp;инфраструктуре и&nbsp;бизнесе<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-containers.html">Контейнеры и&nbsp;open source<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-import.html">Импортонезависимость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-decentral.html">Децентрализация<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-dc.html">Свои ЦОД<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai.html" style="color:#fff">ИИ</a><a href="hub-containers.html" style="color:#fff">Контейнеры и&nbsp;open source</a><a href="hub-import.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral.html" style="color:#fff">Децентрализация</a><a href="hub-dc.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog.html" style="color:#fff">Услуги и&nbsp;решения</a><a href="industry.html" style="color:#fff">По&nbsp;отраслям</a><a href="diagnostics.html" style="color:#fff">Диагностика</a><a href="projects.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about.html" style="color:#fff">О&nbsp;компании</a><a href="method.html" style="color:#fff">Как&nbsp;мы&nbsp;работаем</a><a href="expertise.html" style="color:#fff">Центр экспертизы</a><a href="career.html" style="color:#fff">Карьера</a><a href="press.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts.html" style="color:#fff">Контакты и&nbsp;офисы</a><a href="contacts.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

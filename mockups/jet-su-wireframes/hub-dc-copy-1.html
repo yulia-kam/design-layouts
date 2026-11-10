@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — Свои ЦОД</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{padding:20px 0;border-top:1px solid #111}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #111}
+.cmp>div{padding:20px 20px 24px 0;border-bottom:1px solid #e0e0e0}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3,.cmp{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:0 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:14px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:0 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 180px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:18px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:32px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px}
+.hx-res{border:2px solid #111;border-radius:4px;padding:28px;position:sticky;top:80px}
+.hx-faq{margin-top:32px;border-top:1px solid #111}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";font-weight:400;color:#5c5c5c}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0;max-width:900px}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:80px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:34px}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="main-logo.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики">
+<div class="wrap rubr-in">
+<a href="main-logo.html">Главное</a>
+<a href="hub-kiber-copy-1.html">Киберустойчивость</a>
+<a href="hub-ai-copy-1.html">ИИ</a>
+<a href="hub-containers-copy-1.html">Контейнеры и&nbsp;open source</a>
+<a href="hub-import-copy-1.html">Импортонезависимость</a>
+<a href="hub-decentral-copy-1.html">Децентрализация</a>
+<a href="hub-dc-copy-1.html" style="border-bottom:2px solid #111">Свои ЦОД</a>
+<span style="color:#b8b8b8" aria-hidden="true">|</span>
+<a href="diagnostics-copy.html">Диагностика</a><a href="projects-copy.html">Проекты</a><a href="expertise-copy.html">Центр экспертизы</a>
+</div>
+</nav>
+
+<nav class="secnav" aria-label="Разделы страницы">
+<a href="#problem">Проблема</a><a href="#myths">Реальность</a><a href="#answer">Наш ответ</a><a href="#how">Как&nbsp;это&nbsp;устроено</a><a href="#arch">Архитектуры</a><a href="#services">Чем&nbsp;реализуем</a><a href="#proof">Доказательства</a><a href="#case">Кейс</a><a href="#expertise">Экспертиза</a><a href="#check">Самопроверка</a><a href="#faq">Вопросы</a><a href="#contact" style="background:#D4F53C;color:#111">Обсудить</a>
+</nav>
+
+<section class="wrap" style="padding-top:24px">
+<div class="lbl" style="font-size:12px"><a href="main-logo.html" style="color:#5c5c5c">Главная</a> / <a href="vyzovy-copy.html" style="color:#5c5c5c">Вызовы</a> / <span style="color:#111">Собственные ЦОД</span></div>
+<div class="ann" style="margin-top:24px">01 · Первый экран: проверочный вопрос → переформулировка → цифра</div>
+<div style="display:flex;gap:40px;align-items:stretch;flex-wrap:wrap">
+<div style="flex:1 1 640px;min-width:0">
+<div class="lbl" style="color:#111">Проверочный вопрос руководителю</div>
+<p class="serif" style="font-style:italic;font-size:22px;line-height:1.35;color:#333;margin:10px 0 0">Где мы будем считать то, что&nbsp;нельзя отдать в&nbsp;чужое облако, — и&nbsp;хватит ли там электричества?</p>
+<h1 class="h1" style="margin:24px 0 0;font-size:60px;line-height:1.04;font-weight:700;letter-spacing:-.025em">Электричество в&nbsp;Москве почти закончилось.<br><span class="mark">Под&nbsp;ваш ИИ мощности может не&nbsp;найтись.</span></h1>
+<p style="font-size:19px;line-height:1.5;color:#333;margin:24px 0 0;max-width:700px">Нагрузки ИИ требуют кратно большей плотности, свободных мощностей в&nbsp;Москве почти не&nbsp;осталось, а&nbsp;кредиты дорогие. Мы помогаем решить, нужен ли свой ЦОД, подготовить проект заранее и&nbsp;построить площадку, которую потом не&nbsp;придётся переделывать.</p>
+<div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap"><a class="btn btn-p" href="#">Сравнить варианты</a><a class="btn" href="#contact">Поговорить с&nbsp;экспертом</a></div>
+</div>
+<div class="blue" style="flex:0 1 360px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
+<div class="lbl" style="color:#dfe5ff">Что&nbsp;изменилось летом 2026</div>
+<div><div class="serif" style="font-size:96px;line-height:1;font-weight:700">~30%</div><div style="font-size:16px;line-height:1.45;margin-top:12px;color:#eef1ff">бюджета ЦОДа — кондиционирование. Теперь оно в&nbsp;реестре Минпромторга, и&nbsp;практически весь ЦОД можно собрать из&nbsp;российского оборудования</div></div>
+<div class="lbl" style="color:#dfe5ff">Всеволод Воробьёв, направление ЦОД</div>
+</div>
+</div>
+</section>
+
+<section id="problem" class="wrap sec">
+<div class="ann">02 · Проблема — две части</div>
+<h2 class="h2">Что&nbsp;изменилось</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div><div class="lbl">Электричество стало главным ресурсом</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Заказчики хотят ЦОД рядом с&nbsp;офисом или&nbsp;производством, но&nbsp;возможности нового техприсоединения в&nbsp;Москве и&nbsp;области практически исчерпаны. Строительство смещается в&nbsp;регионы — а&nbsp;там конкуренция за&nbsp;инженеров с&nbsp;производствами.</p></div>
+<div><div class="lbl">Обычный ЦОД под&nbsp;ИИ не&nbsp;переделать</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Меньшая проектная мощность — это&nbsp;другое оборудование, даже кабели другого сечения. Под&nbsp;высокую плотность нужно менять всю инженерию или&nbsp;размазывать нагрузку по&nbsp;стойкам. Чаще проще построить новый объект.</p></div>
+</div>
+<div class="g3" style="margin-top:48px">
+<div class="fact"><div class="serif num">5–10 лет</div><div style="font-size:15px;margin-top:10px">горизонт окупаемости крупного проекта ЦОД — на&nbsp;заёмных и&nbsp;дорогих деньгах</div><div class="lbl" style="font-size:10px;margin-top:6px">Всеволод Воробьёв · «Телеспутник»</div></div>
+<div class="fact"><div class="serif num">30%+</div><div style="font-size:15px;margin-top:10px">компаний уже выделили в&nbsp;ЦОДе сетевой сегмент под&nbsp;ИИ; в&nbsp;начале 2025 года таких планов было 8%</div><div class="lbl" style="font-size:10px;margin-top:6px">Джет × АЦ ИКС · 2026</div></div>
+<div class="fact"><div class="serif num">50–55 кВт</div><div style="font-size:15px;margin-top:10px">на&nbsp;стойку снимают решения консорциумов российских производителей</div><div class="lbl" style="font-size:10px;margin-top:6px">Оценка «Инфосистемы Джет»</div></div>
+</div>
+</section>
+
+<section id="myths" class="wrap sec"><div class="hx-sh"><div class="lbl">Реальность</div><h2 class="hx-h2">Мифы и&nbsp;реальность</h2></div><div style="margin-top:32px"><div class="hx-myth" style="padding:12px 0;border-bottom:1px solid #111"><div class="lbl">Что&nbsp;принято считать</div><div class="lbl">Цифра</div><div class="lbl">Что&nbsp;на&nbsp;самом деле</div></div><div class="hx-myth"><div class="m">«Обычный ЦОД доточим под&nbsp;ИИ»</div><div class="v">с&nbsp;нуля</div><div class="r">в&nbsp;большинстве случаев проще построить новый объект: нужно менять инженерную инфраструктуру или&nbsp;распределять нагрузку по&nbsp;множеству стоек.</div></div><div class="hx-myth"><div class="m">«Модульный ЦОД — это&nbsp;быстро в&nbsp;любом случае»</div><div class="v">~3 мес.</div><div class="r">на&nbsp;сборку и&nbsp;логистику — при&nbsp;наличии компонентов. Очереди возникают из-за ИБП, кондиционеров и&nbsp;аккумуляторов.</div></div><div class="hx-myth"><div class="m">«Нам нужны сотни стоек»</div><div class="v">10</div><div class="r">стоек — во&nbsp;столько обычно укладывается критическая часть инфраструктуры крупного заказчика.</div></div><div class="hx-myth"><div class="m">«Энергоэффективность — это&nbsp;про&nbsp;Европу»</div><div class="v">PUE</div><div class="r">играет решающую роль при&nbsp;выборе площадки и&nbsp;архитектуры: энергопотребление растёт вместе с&nbsp;нагрузками.</div></div><div class="hx-myth"><div class="m">«ИИ-ЦОД подойдёт и&nbsp;под&nbsp;обычные задачи»</div><div class="v">дорого</div><div class="r">— специализированный ЦОД для&nbsp;стандартных задач не&nbsp;окупается. Решение — гибридные объекты с&nbsp;отдельными залами под&nbsp;ИИ.</div></div></div><div class="cap" style="margin-top:14px">Эксперты центра сетевых решений «Инфосистемы Джет»</div></section>
+<section id="answer" class="wrap sec">
+<div class="ann">03 · Наш ответ — идеи решения, без&nbsp;продуктов</div>
+<h2 class="h2">Наш ответ</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">1</div><div style="font-weight:600;font-size:24px;margin-top:16px">Подготовиться, пока дорого строить</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">Площадка, концепция и&nbsp;проектная документация стоят немного по&nbsp;сравнению с&nbsp;объектом, но&nbsp;позволяют стартовать сразу, как&nbsp;только изменятся условия или&nbsp;появятся мощности.</p></div>
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">2</div><div style="font-weight:600;font-size:24px;margin-top:16px">Закладывать запас на&nbsp;этапе концепции</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">Энергетический и&nbsp;архитектурный запас под&nbsp;рост плотности, жидкостное охлаждение, гибридные залы под&nbsp;ИИ и&nbsp;обычные нагрузки. Потом это&nbsp;не&nbsp;догнать.</p></div>
+</div>
+<div style="margin-top:56px">
+<div class="lbl" style="color:#111;margin-bottom:12px">Свой ЦОД, аренда или&nbsp;облако — когда что&nbsp;подходит</div>
+<div class="cmp">
+<div><div style="font-weight:600;font-size:18px">Свой ЦОД</div><div style="font-size:15px;color:#333;margin-top:8px;line-height:1.5">Критичные системы с&nbsp;предсказуемой нагрузкой, требования к&nbsp;КИИ, ИИ высокой плотности, данные, которые нельзя выносить.</div></div>
+<div><div style="font-weight:600;font-size:18px">Аренда стоек</div><div style="font-size:15px;color:#333;margin-top:8px;line-height:1.5">Быстрый старт и&nbsp;средний горизонт, когда своей площадки под&nbsp;строительство нет.</div></div>
+<div><div style="font-weight:600;font-size:18px">Облако</div><div style="font-size:15px;color:#333;margin-top:8px;line-height:1.5">Переменная нагрузка, разработка, тесты и&nbsp;пилоты, некритичные сервисы.</div></div>
+</div>
+
+</div>
+</section>
+
+<section id="how" class="wrap sec"><div class="hx-sh"><div class="lbl">Как&nbsp;это&nbsp;происходит</div><h2 class="hx-h2">Свой ЦОД: от&nbsp;энергии и&nbsp;площадки до&nbsp;эксплуатации</h2><p class="hx-lead">Нагрузки ИИ требуют кратно большей плотности, свободных мощностей в&nbsp;Москве почти не&nbsp;осталось, а&nbsp;адаптировать готовый объект под&nbsp;высокую плотность потом практически невозможно. Поэтому запас закладываем на&nbsp;этапе концепции.</p></div><div class="hx-steps"><div class="hx-step"><span class="hx-n">01</span><b>Энергия и&nbsp;площадка</b><p>Сначала электричество и&nbsp;техприсоединение — строительство смещается в&nbsp;регионы, к&nbsp;источникам энергии.</p></div><div class="hx-step"><span class="hx-n">02</span><b>Концепция с&nbsp;запасом</b><p>Плотность на&nbsp;стойку, гибридное или&nbsp;жидкостное охлаждение, сечения кабелей — менять это&nbsp;после постройки почти невозможно.</p></div><div class="hx-step"><span class="hx-n">03</span><b>Выбор формата</b><p>Свой капитальный ЦОД, модульный или&nbsp;контейнерный — или&nbsp;аренда под&nbsp;некритичные задачи.</p></div><div class="hx-step"><span class="hx-n">04</span><b>Российское оборудование</b><p>С&nbsp;лета 2026 года в&nbsp;реестре Минпромторга есть кондиционирование — практически весь ЦОД можно собрать из&nbsp;российского.</p></div><div class="hx-step"><span class="hx-n">05</span><b>Эксплуатация</b><p>Дежурная смена, SLA, аварийное обслуживание, мониторинг инженерных систем и&nbsp;PUE.</p></div></div><div class="hx-duo"><div class="hx-q"><p>«Физику обмануть нельзя, ведь меньшая проектная мощность — это&nbsp;иное оборудование. Даже кабели используются неподходящие для&nbsp;ИИ — обладающие меньшим сечением»</p><div class="hx-who"><b style="color:#111">Сергей Андронов</b>, директор центра сетевых решений</div></div><div class="hx-note"><div class="lbl" style="color:#D4F53C">Электричество</div><p>«Электроэнергии в&nbsp;крупных российских городах становится всё меньше и&nbsp;меньше. В&nbsp;Москве её практически не&nbsp;осталось».</p><div class="hx-who">Всеволод Воробьёв, руководитель направления ЦОД</div></div></div></section>
+<section id="arch" class="wrap sec">
+<div class="ann">04 · Архитектуры ответа → страницы третьего уровня</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Как&nbsp;решаем</h2><span class="lbl">6 архитектур</span></div>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="ph" style="height:150px">[сравнение вариантов]</div><div style="font-weight:600;font-size:21px">Своё, аренда или&nbsp;облако</div><div style="font-size:15px;line-height:1.5;color:#333">Совокупная стоимость владения и&nbsp;риски каждого варианта на&nbsp;горизонте 5–10 лет.</div><div class="lbl" style="font-size:10px">Когда нужно: заканчивается договор аренды</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема ЦОД для&nbsp;ИИ]</div><div style="font-weight:600;font-size:21px">ЦОД для&nbsp;ИИ</div><div style="font-size:15px;line-height:1.5;color:#333">GPU-кластеры, жидкостное и&nbsp;иммерсионное охлаждение, управление режимами «обучение» и&nbsp;«эксплуатация».</div><div class="lbl" style="font-size:10px">Когда нужно: модели переезжают в&nbsp;свой контур</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема модульного ЦОД]</div><div style="font-weight:600;font-size:21px">Модульные и&nbsp;контейнерные ЦОДы</div><div style="font-size:15px;line-height:1.5;color:#333">Около трёх месяцев на&nbsp;сборку и&nbsp;логистику при&nbsp;наличии компонентов. Узкое место — ИБП, кондиционеры и&nbsp;АКБ.</div><div class="lbl" style="font-size:10px">Когда нужно: мощность нужна быстро</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема реестрового ЦОД]</div><div style="font-weight:600;font-size:21px">ЦОД из&nbsp;российского оборудования</div><div style="font-size:15px;line-height:1.5;color:#333">ИБП, стойки, СКС и&nbsp;теперь кондиционирование — в&nbsp;реестре. Учитываем сроки поставок отечественных заводов.</div><div class="lbl" style="font-size:10px">Когда нужно: требования к&nbsp;импортонезависимости площадки</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[карта регионов]</div><div style="font-weight:600;font-size:21px">Площадка в&nbsp;регионе</div><div style="font-size:15px;line-height:1.5;color:#333">Поиск энергопрофицитной площадки, каналы связи, подготовка своей команды эксплуатации на&nbsp;месте.</div><div class="lbl" style="font-size:10px">Когда нужно: в&nbsp;Москве нет мощностей</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема эксплуатации]</div><div style="font-weight:600;font-size:21px">Эксплуатация инженерных систем</div><div style="font-size:15px;line-height:1.5;color:#333">Дежурная смена, SLA, аварийное обслуживание, аудит инженерных систем и&nbsp;процессов управления ЦОДом.</div><div class="lbl" style="font-size:10px">Когда нужно: площадка уже есть</div></a>
+</div>
+</section>
+
+
+</div>
+</body>
+</html>

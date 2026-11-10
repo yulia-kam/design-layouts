@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — ИИ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{padding:20px 0;border-top:1px solid #111}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:0 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:14px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:0 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 180px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:18px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:32px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px}
+.hx-res{border:2px solid #111;border-radius:4px;padding:28px;position:sticky;top:80px}
+.hx-faq{margin-top:32px;border-top:1px solid #111}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";font-weight:400;color:#5c5c5c}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0;max-width:900px}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:80px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:34px}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="main-logo.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики">
+<div class="wrap rubr-in">
+<a href="main-logo.html">Главное</a>
+<a href="hub-kiber-copy-1.html">Киберустойчивость</a>
+<a href="hub-ai-copy-1.html" style="border-bottom:2px solid #111">ИИ</a>
+<a href="hub-containers-copy-1.html">Контейнеры и&nbsp;open source</a>
+<a href="hub-import-copy-1.html">Импортонезависимость</a>
+<a href="hub-decentral-copy-1.html">Децентрализация</a>
+<a href="hub-dc-copy-1.html">Свои ЦОД</a>
+<span style="color:#b8b8b8" aria-hidden="true">|</span>
+<a href="diagnostics-copy.html">Диагностика</a><a href="projects-copy.html">Проекты</a><a href="expertise-copy.html">Центр экспертизы</a>
+</div>
+</nav>
+
+<nav class="secnav" aria-label="Разделы страницы">
+<a href="#problem">Проблема</a><a href="#myths">Реальность</a><a href="#answer">Наш ответ</a><a href="#how">Как&nbsp;это&nbsp;устроено</a><a href="#arch">Архитектуры</a><a href="#services">Чем&nbsp;реализуем</a><a href="#proof">Доказательства</a><a href="#case">Кейс</a><a href="#expertise">Экспертиза</a><a href="#check">Самопроверка</a><a href="#faq">Вопросы</a><a href="#contact" style="background:#D4F53C;color:#111">Обсудить</a>
+</nav>
+
+<section class="wrap" style="padding-top:24px">
+<div class="lbl" style="font-size:12px"><a href="main-logo.html" style="color:#5c5c5c">Главная</a> / <a href="vyzovy-copy.html" style="color:#5c5c5c">Вызовы</a> / <span style="color:#111">ИИ в&nbsp;инфраструктуре и&nbsp;бизнесе</span></div>
+<div class="ann" style="margin-top:24px">01 · Первый экран: проверочный вопрос → переформулировка → цифра</div>
+<div style="display:flex;gap:40px;align-items:stretch;flex-wrap:wrap">
+<div style="flex:1 1 640px;min-width:0">
+<div class="lbl" style="color:#111">Проверочный вопрос руководителю</div>
+<p class="serif" style="font-style:italic;font-size:22px;line-height:1.35;color:#333;margin:10px 0 0">Пилоты с&nbsp;ИИ получаются. Почему ни&nbsp;один не&nbsp;дошёл до&nbsp;денег?</p>
+<h1 class="h1" style="margin:24px 0 0;font-size:60px;line-height:1.04;font-weight:700;letter-spacing:-.025em">Ваш ИИ-пилот, скорее всего, не&nbsp;доживёт до&nbsp;прода.<br><span class="mark">И&nbsp;дело не&nbsp;в&nbsp;модели.</span></h1>
+<p style="font-size:19px;line-height:1.5;color:#333;margin:24px 0 0;max-width:700px">Барьер редко в&nbsp;качестве моделей или&nbsp;цене железа. Заявку согласовали в&nbsp;мессенджере, решение приняли на&nbsp;планёрке — для&nbsp;ИИ этого не&nbsp;существует. Мы начинаем с&nbsp;цифрового следа, данных и&nbsp;интеграций, а&nbsp;потом считаем, где агент окупится.</p>
+<div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap"><a class="btn btn-p" href="#">Оценить готовность к&nbsp;ИИ</a><a class="btn" href="#contact">Поговорить с&nbsp;экспертом</a></div>
+</div>
+<div class="blue" style="flex:0 1 360px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
+<div class="lbl" style="color:#dfe5ff">Цифра, с&nbsp;которой начинаем разговор</div>
+<div><div class="serif" style="font-size:96px;line-height:1;font-weight:700">до&nbsp;60%</div><div style="font-size:16px;line-height:1.45;margin-top:12px;color:#eef1ff">ИИ-проектов останавливаются на&nbsp;стадии пилота</div></div>
+<div class="lbl" style="color:#dfe5ff">Опыт «Инфосистемы Джет»</div>
+</div>
+</div>
+</section>
+
+<section id="problem" class="wrap sec">
+<div class="ann">02 · Проблема — две части</div>
+<h2 class="h2">Что&nbsp;изменилось</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div><div class="lbl">Пилот и&nbsp;прод — два разных мира</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Пилот живёт в&nbsp;облаке, на&nbsp;небольшом обезличенном наборе данных, и&nbsp;счёт выглядит скромно. В&nbsp;проде корпоративные данные наружу не&nbsp;отдашь: нужно железо, своя модель в&nbsp;контуре, дообучение и&nbsp;доработка под&nbsp;процессы. Экономика часто перестаёт сходиться именно здесь.</p></div>
+<div><div class="lbl">У&nbsp;агента нет хозяина</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Нужен человек из&nbsp;бизнеса, который выберет сценарий, договорится о&nbsp;метриках и&nbsp;перестроит процесс. ИТ может собрать агента, но&nbsp;в&nbsp;одиночку в&nbsp;прод его не&nbsp;вытащит: такое решение принимает уже не&nbsp;ИТ.</p></div>
+</div>
+<div class="g3" style="margin-top:48px">
+<div class="fact"><div class="serif num">86%</div><div style="font-size:15px;margin-top:10px">крупных компаний пилотируют или&nbsp;используют LLM; в&nbsp;пром вывели 53% из&nbsp;них</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+<div class="fact"><div class="serif num">46%</div><div style="font-size:15px;margin-top:10px">сворачивали ИИ-проекты, потому что&nbsp;те не&nbsp;приносили экономического эффекта</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+<div class="fact"><div class="serif num">44%</div><div style="font-size:15px;margin-top:10px">называют барьером неготовность процессов, данных и&nbsp;интеграций</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+</div>
+</section>
+
+<section id="myths" class="wrap sec"><div class="hx-sh"><div class="lbl">Реальность</div><h2 class="hx-h2">Мифы и&nbsp;реальность</h2></div><div style="margin-top:32px"><div class="hx-myth" style="padding:12px 0;border-bottom:1px solid #111"><div class="lbl">Что&nbsp;принято считать</div><div class="lbl">Цифра</div><div class="lbl">Что&nbsp;на&nbsp;самом деле</div></div><div class="hx-myth"><div class="m">«Главное — выбрать самую сильную модель»</div><div class="v">80%</div><div class="r">операционных задач закрываются небольшими моделями. Барьер почти никогда не&nbsp;в&nbsp;качестве модели.</div></div><div class="hx-myth"><div class="m">«Пилот удался — масштабируем»</div><div class="v">⅓</div><div class="r">проектов с&nbsp;ИИ-агентами дожила до&nbsp;промышленной эксплуатации. Решение, хорошее на&nbsp;тестовых данных, теряет в&nbsp;качестве при&nbsp;масштабировании.</div></div><div class="hx-myth"><div class="m">«Всё упирается в&nbsp;стоимость железа»</div><div class="v">44%</div><div class="r">компаний отказываются от&nbsp;агентов из-за неготовности процессов, данных и&nbsp;интеграций — это&nbsp;главный барьер.</div></div><div class="hx-myth"><div class="m">«Это&nbsp;ИТ-проект»</div><div class="v">40%</div><div class="r">компаний называют барьером отсутствие владельца процесса или&nbsp;продукта со&nbsp;стороны бизнеса.</div></div><div class="hx-myth"><div class="m">«Агенту можно доверить решения»</div><div class="v">2%</div><div class="r">компаний готовы делегировать ИИ решения с&nbsp;высоким риском. 60% доверяют только рекомендации сотрудникам.</div></div></div><div class="cap" style="margin-top:14px">Исследование «ИИ-зрелость крупного бизнеса», «Инфосистемы Джет» × Smart Ranking, 2026</div></section>
+<section id="answer" class="wrap sec">
+<div class="ann">03 · Наш ответ — идеи решения, без&nbsp;продуктов</div>
+<h2 class="h2">Наш ответ</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">1</div><div style="font-weight:600;font-size:24px;margin-top:16px">Сначала фундамент, потом агенты</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">Оцифровать процессы, хранить максимум данных, связать корпоративные системы с&nbsp;ИИ-платформой. «Дешевле хранить всё, чем&nbsp;не&nbsp;хранить ничего»: без&nbsp;цифрового следа ИИ автоматизирует не&nbsp;больше 5% процессов.</p></div>
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">2</div><div style="font-weight:600;font-size:24px;margin-top:16px">Небольшие модели там, где хватает, большие — там, где нужно</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">По&nbsp;нашему опыту, около 80% операционных задач закрываются небольшими моделями на&nbsp;скромном GPU-кластере. Данные с&nbsp;коммерческой тайной остаются в&nbsp;вашем контуре.</p></div>
+</div>
+</section>
+
+<section id="how" class="wrap sec"><div class="hx-sh"><div class="lbl">Как&nbsp;это&nbsp;происходит</div><h2 class="hx-h2">Путь от&nbsp;пилота к&nbsp;промышленной эксплуатации</h2><p class="hx-lead">Пилот живёт в&nbsp;облаке, на&nbsp;небольшом обезличенном наборе данных, и&nbsp;счёт выглядит скромно. В&nbsp;проде всё иначе: данные наружу не&nbsp;отдашь, нужно железо, своя модель в&nbsp;контуре и&nbsp;доработка под&nbsp;процессы. Поэтому мы идём по&nbsp;шагам.</p></div><div class="hx-steps"><div class="hx-step"><span class="hx-n">01</span><b>Цифровой след</b><p>Заявку согласовали в&nbsp;мессенджере, решение приняли на&nbsp;планёрке — для&nbsp;ИИ этого не&nbsp;существует. Без&nbsp;цифрового следа ИИ автоматизирует не&nbsp;больше 5% процессов.</p></div><div class="hx-step"><span class="hx-n">02</span><b>Инфраструктура данных</b><p>В&nbsp;эпоху ИИ «дешевле хранить всё, чем&nbsp;не&nbsp;хранить ничего». Озёра данных плюс Data Governance и&nbsp;Data Quality.</p></div><div class="hx-step"><span class="hx-n">03</span><b>Интеграции</b><p>У&nbsp;многих ERP и&nbsp;самописных CRM нет API — его приходится делать. И&nbsp;сразу решать, как&nbsp;контролировать действия агента в&nbsp;системах.</p></div><div class="hx-step"><span class="hx-n">04</span><b>Владелец из&nbsp;бизнеса</b><p>Человек, который выберет сценарий, договорится о&nbsp;метриках и&nbsp;перестроит процесс под&nbsp;агента. ИТ соберёт агента, но&nbsp;в&nbsp;прод в&nbsp;одиночку не&nbsp;вытащит.</p></div><div class="hx-step"><span class="hx-n">05</span><b>Экономика прода</b><p>В&nbsp;проде расход токенов растёт в&nbsp;десятки раз, а&nbsp;даже небольшой GPU-кластер стоит несколько десятков миллионов рублей. Считаем до&nbsp;старта, а&nbsp;не&nbsp;после.</p></div></div><div class="hx-duo"><div class="hx-q"><p>«Без&nbsp;цифрового следа и&nbsp;данных искусственный интеллект не&nbsp;знает ничего о&nbsp;компании и&nbsp;её бизнес-процессах»</p><div class="hx-who"><b style="color:#111">Максим Андрианов</b>, директор Дирекции разработки и&nbsp;внедрения ПО</div></div><div class="hx-note"><div class="lbl" style="color:#D4F53C">Из&nbsp;практики</div><p>Около 80% операционных задач закрываются небольшими моделями на&nbsp;небольшом кластере GPU. Дорогие глобальные модели нужны для&nbsp;оставшихся 20% — например, code review по&nbsp;нескольким модулям сразу.</p><div class="hx-who">Опыт «Инфосистемы Джет»</div></div></div></section>
+<section id="arch" class="wrap sec">
+<div class="ann">04 · Архитектуры ответа → страницы третьего уровня</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Как&nbsp;решаем</h2><span class="lbl">6 архитектур</span></div>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="ph" style="height:150px">[схема AI-ready фундамента]</div><div style="font-weight:600;font-size:21px">AI-ready фундамент: процессы, данные, интеграции</div><div style="font-size:15px;line-height:1.5;color:#333">Цифровой след процессов, озёра данных на&nbsp;российских платформах, API к&nbsp;ERP и&nbsp;CRM.</div><div class="lbl" style="font-size:10px">Когда нужно: пилоты есть, масштабирования нет</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема локальных моделей]</div><div style="font-weight:600;font-size:21px">Локальные модели в&nbsp;вашем контуре</div><div style="font-size:15px;line-height:1.5;color:#333">Облако — для&nbsp;проверки гипотез, open-source модели на&nbsp;своём железе — для&nbsp;коммерческой тайны. Обычно это&nbsp;5–10 карт H100.</div><div class="lbl" style="font-size:10px">Когда нужно: персональные данные и&nbsp;договоры</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема процесса разработки]</div><div style="font-weight:600;font-size:21px">ИИ в&nbsp;разработке ПО</div><div style="font-size:15px;line-height:1.5;color:#333">Требования в&nbsp;Git, агенты в&nbsp;цикле, замер эффекта на&nbsp;реальных спринтах. Без&nbsp;обещаний «в&nbsp;пять раз быстрее».</div><div class="lbl" style="font-size:10px">Когда нужно: разработчики уже пользуются ИИ без&nbsp;правил</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема агента бэкофиса]</div><div style="font-weight:600;font-size:21px">ИИ-агенты в&nbsp;бэкофисе</div><div style="font-size:15px;line-height:1.5;color:#333">Счета, договоры, письма: ИИ распознаёт, извлекает и&nbsp;передаёт данные дальше. Решения принимает человек.</div><div class="lbl" style="font-size:10px">Когда нужно: много документов, мало людей</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема ЦОД для&nbsp;ИИ]</div><div style="font-weight:600;font-size:21px">Инфраструктура и&nbsp;ЦОД для&nbsp;ИИ</div><div style="font-size:15px;line-height:1.5;color:#333">GPU-кластеры, сеть, питание и&nbsp;жидкостное охлаждение. Обычный ЦОД под&nbsp;ИИ «заточить» почти не&nbsp;получится.</div><div class="lbl" style="font-size:10px">Когда нужно: модели переезжают в&nbsp;свой контур</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема журналирования]</div><div style="font-weight:600;font-size:21px">ИИ как&nbsp;«цифровой самописец»</div><div style="font-size:15px;line-height:1.5;color:#333">Версии данных и&nbsp;моделей, журналы действий, возможность откатить или&nbsp;остановить модель.</div><div class="lbl" style="font-size:10px">Когда нужно: готовиться к&nbsp;ответственности за&nbsp;ущерб от&nbsp;ИИ</div></a>
+</div>
+</section>
+
+
+</div>
+</body>
+</html>

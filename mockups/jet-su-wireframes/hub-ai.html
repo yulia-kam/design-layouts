@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — ИИ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{padding:20px 0;border-top:1px solid #111}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:0 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:14px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:0 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 180px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:18px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:32px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px}
+.hx-res{border:2px solid #111;border-radius:4px;padding:28px;position:sticky;top:80px}
+.hx-faq{margin-top:32px;border-top:1px solid #111}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";font-weight:400;color:#5c5c5c}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0;max-width:900px}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:84px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:32px}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="Main.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики">
+<div class="wrap rubr-in">
+<a href="Main.html">Главное</a>
+<a href="hub-kiber.html">Киберустойчивость</a>
+<a href="hub-ai.html" style="border-bottom:2px solid #111">ИИ</a>
+<a href="hub-containers.html">Контейнеры и open source</a>
+<a href="hub-import.html">Импортонезависимость</a>
+<a href="hub-decentral.html">Децентрализация</a>
+<a href="hub-dc.html">Свои ЦОД</a>
+<span style="color:#b8b8b8" aria-hidden="true">|</span>
+<a href="diagnostics.html">Диагностика</a><a href="projects.html">Проекты</a><a href="expertise.html">Центр экспертизы</a>
+</div>
+</nav>
+
+<nav class="secnav" aria-label="Разделы страницы">
+<a href="#problem">Проблема</a><a href="#myths">Реальность</a><a href="#answer">Наш ответ</a><a href="#how">Как это устроено</a><a href="#arch">Архитектуры</a><a href="#services">Чем реализуем</a><a href="#proof">Доказательства</a><a href="#case">Кейс</a><a href="#expertise">Экспертиза</a><a href="#check">Самопроверка</a><a href="#faq">Вопросы</a><a href="#contact" style="background:#D4F53C;color:#111">Обсудить</a>
+</nav>
+
+<section class="wrap" style="padding-top:24px">
+<div class="lbl" style="font-size:12px"><a href="Main.html" style="color:#5c5c5c">Главная</a> / <a href="vyzovy.html" style="color:#5c5c5c">Вызовы</a> / <span style="color:#111">ИИ в инфраструктуре и бизнесе</span></div>
+<div class="ann" style="margin-top:24px">01 · Первый экран: проверочный вопрос → переформулировка → цифра</div>
+<div style="display:flex;gap:40px;align-items:stretch;flex-wrap:wrap">
+<div style="flex:1 1 640px;min-width:0">
+<div class="lbl" style="color:#111">Проверочный вопрос руководителю</div>
+<p class="serif" style="font-style:italic;font-size:22px;line-height:1.35;color:#333;margin:10px 0 0">Пилоты с ИИ получаются. Почему ни один не дошёл до денег?</p>
+<h1 class="h1" style="margin:24px 0 0;font-size:60px;line-height:1.04;font-weight:700;letter-spacing:-.025em">Ваш ИИ-пилот, скорее всего, не доживёт до прода.<br><span class="mark">И дело не в модели.</span></h1>
+<p style="font-size:19px;line-height:1.5;color:#333;margin:24px 0 0;max-width:700px">Барьер редко в качестве моделей или цене железа. Заявку согласовали в мессенджере, решение приняли на планёрке — для ИИ этого не существует. Мы начинаем с цифрового следа, данных и интеграций, а потом считаем, где агент окупится.</p>
+<div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap"><a class="btn btn-p" href="#">Оценить готовность к ИИ</a><a class="btn" href="#contact">Поговорить с экспертом</a></div>
+</div>
+<div class="blue" style="flex:0 1 360px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
+<div class="lbl" style="color:#dfe5ff">Цифра, с которой начинаем разговор</div>
+<div><div class="serif" style="font-size:96px;line-height:1;font-weight:700">до 60%</div><div style="font-size:16px;line-height:1.45;margin-top:12px;color:#eef1ff">ИИ-проектов останавливаются на стадии пилота</div></div>
+<div class="lbl" style="color:#dfe5ff">Опыт «Инфосистемы Джет»</div>
+</div>
+</div>
+</section>
+
+<section id="problem" class="wrap sec">
+<div class="ann">02 · Проблема — две части</div>
+<h2 class="h2">Что изменилось</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div><div class="lbl">Пилот и прод — два разных мира</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Пилот живёт в облаке, на небольшом обезличенном наборе данных, и счёт выглядит скромно. В проде корпоративные данные наружу не отдашь: нужно железо, своя модель в контуре, дообучение и доработка под процессы. Экономика часто перестаёт сходиться именно здесь.</p></div>
+<div><div class="lbl">У агента нет хозяина</div><p style="font-size:20px;line-height:1.5;margin:12px 0 0">Нужен человек из бизнеса, который выберет сценарий, договорится о метриках и перестроит процесс. ИТ может собрать агента, но в одиночку в прод его не вытащит: такое решение принимает уже не ИТ.</p></div>
+</div>
+<div class="g3" style="margin-top:48px">
+<div class="fact"><div class="serif num">86%</div><div style="font-size:15px;margin-top:10px">крупных компаний пилотируют или используют LLM; в пром вывели 53% из них</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+<div class="fact"><div class="serif num">46%</div><div style="font-size:15px;margin-top:10px">сворачивали ИИ-проекты, потому что те не приносили экономического эффекта</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+<div class="fact"><div class="serif num">44%</div><div style="font-size:15px;margin-top:10px">называют барьером неготовность процессов, данных и интеграций</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование ИИ-зрелости · 2026</div></div>
+</div>
+</section>
+
+<section id="myths" class="wrap sec"><div class="hx-sh"><div class="lbl">Реальность</div><h2 class="hx-h2">Мифы и реальность</h2></div><div style="margin-top:32px"><div class="hx-myth" style="padding:12px 0;border-bottom:1px solid #111"><div class="lbl">Что принято считать</div><div class="lbl">Цифра</div><div class="lbl">Что на самом деле</div></div><div class="hx-myth"><div class="m">«Главное — выбрать самую сильную модель»</div><div class="v">80%</div><div class="r">операционных задач закрываются небольшими моделями. Барьер почти никогда не в качестве модели.</div></div><div class="hx-myth"><div class="m">«Пилот удался — масштабируем»</div><div class="v">⅓</div><div class="r">проектов с ИИ-агентами дожила до промышленной эксплуатации. Решение, хорошее на тестовых данных, теряет в качестве при масштабировании.</div></div><div class="hx-myth"><div class="m">«Всё упирается в стоимость железа»</div><div class="v">44%</div><div class="r">компаний отказываются от агентов из-за неготовности процессов, данных и интеграций — это главный барьер.</div></div><div class="hx-myth"><div class="m">«Это ИТ-проект»</div><div class="v">40%</div><div class="r">компаний называют барьером отсутствие владельца процесса или продукта со стороны бизнеса.</div></div><div class="hx-myth"><div class="m">«Агенту можно доверить решения»</div><div class="v">2%</div><div class="r">компаний готовы делегировать ИИ решения с высоким риском. 60% доверяют только рекомендации сотрудникам.</div></div></div><div class="cap" style="margin-top:14px">Исследование «ИИ-зрелость крупного бизнеса», «Инфосистемы Джет» × Smart Ranking, 2026</div></section>
+<section id="answer" class="wrap sec">
+<div class="ann">03 · Наш ответ — идеи решения, без продуктов</div>
+<h2 class="h2">Наш ответ</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">1</div><div style="font-weight:600;font-size:24px;margin-top:16px">Сначала фундамент, потом агенты</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">Оцифровать процессы, хранить максимум данных, связать корпоративные системы с ИИ-платформой. «Дешевле хранить всё, чем не хранить ничего»: без цифрового следа ИИ автоматизирует не больше 5% процессов.</p></div>
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">2</div><div style="font-weight:600;font-size:24px;margin-top:16px">Небольшие модели там, где хватает, большие — там, где нужно</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">По нашему опыту, около 80% операционных задач закрываются небольшими моделями на скромном GPU-кластере. Данные с коммерческой тайной остаются в вашем контуре.</p></div>
+</div>
+</section>
+
+<section id="how" class="wrap sec"><div class="hx-sh"><div class="lbl">Как это происходит</div><h2 class="hx-h2">Путь от пилота к промышленной эксплуатации</h2><p class="hx-lead">Пилот живёт в облаке, на небольшом обезличенном наборе данных, и счёт выглядит скромно. В проде всё иначе: данные наружу не отдашь, нужно железо, своя модель в контуре и доработка под процессы. Поэтому мы идём по шагам.</p></div><div class="hx-steps"><div class="hx-step"><span class="hx-n">01</span><b>Цифровой след</b><p>Заявку согласовали в мессенджере, решение приняли на планёрке — для ИИ этого не существует. Без цифрового следа ИИ автоматизирует не больше 5% процессов.</p></div><div class="hx-step"><span class="hx-n">02</span><b>Инфраструктура данных</b><p>В эпоху ИИ «дешевле хранить всё, чем не хранить ничего». Озёра данных плюс Data Governance и Data Quality.</p></div><div class="hx-step"><span class="hx-n">03</span><b>Интеграции</b><p>У многих ERP и самописных CRM нет API — его приходится делать. И сразу решать, как контролировать действия агента в системах.</p></div><div class="hx-step"><span class="hx-n">04</span><b>Владелец из бизнеса</b><p>Человек, который выберет сценарий, договорится о метриках и перестроит процесс под агента. ИТ соберёт агента, но в прод в одиночку не вытащит.</p></div><div class="hx-step"><span class="hx-n">05</span><b>Экономика прода</b><p>В проде расход токенов растёт в десятки раз, а даже небольшой GPU-кластер стоит несколько десятков миллионов рублей. Считаем до старта, а не после.</p></div></div><div class="hx-duo"><div class="hx-q"><p>«Без цифрового следа и данных искусственный интеллект не знает ничего о компании и её бизнес-процессах»</p><div class="hx-who"><b style="color:#111">Максим Андрианов</b>, директор Дирекции разработки и внедрения ПО</div></div><div class="hx-note"><div class="lbl" style="color:#D4F53C">Из практики</div><p>Около 80% операционных задач закрываются небольшими моделями на небольшом кластере GPU. Дорогие глобальные модели нужны для оставшихся 20% — например, code review по нескольким модулям сразу.</p><div class="hx-who">Опыт «Инфосистемы Джет»</div></div></div></section>
+<section id="arch" class="wrap sec">
+<div class="ann">04 · Архитектуры ответа → страницы третьего уровня</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Как решаем</h2><span class="lbl">6 архитектур</span></div>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="ph" style="height:150px">[схема AI-ready фундамента]</div><div style="font-weight:600;font-size:21px">AI-ready фундамент: процессы, данные, интеграции</div><div style="font-size:15px;line-height:1.5;color:#333">Цифровой след процессов, озёра данных на российских платформах, API к ERP и CRM.</div><div class="lbl" style="font-size:10px">Когда нужно: пилоты есть, масштабирования нет</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема локальных моделей]</div><div style="font-weight:600;font-size:21px">Локальные модели в вашем контуре</div><div style="font-size:15px;line-height:1.5;color:#333">Облако — для проверки гипотез, open-source модели на своём железе — для коммерческой тайны. Обычно это 5–10 карт H100.</div><div class="lbl" style="font-size:10px">Когда нужно: персональные данные и договоры</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема процесса разработки]</div><div style="font-weight:600;font-size:21px">ИИ в разработке ПО</div><div style="font-size:15px;line-height:1.5;color:#333">Требования в Git, агенты в цикле, замер эффекта на реальных спринтах. Без обещаний «в пять раз быстрее».</div><div class="lbl" style="font-size:10px">Когда нужно: разработчики уже пользуются ИИ без правил</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема агента бэкофиса]</div><div style="font-weight:600;font-size:21px">ИИ-агенты в бэкофисе</div><div style="font-size:15px;line-height:1.5;color:#333">Счета, договоры, письма: ИИ распознаёт, извлекает и передаёт данные дальше. Решения принимает человек.</div><div class="lbl" style="font-size:10px">Когда нужно: много документов, мало людей</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема ЦОД для ИИ]</div><div style="font-weight:600;font-size:21px">Инфраструктура и ЦОД для ИИ</div><div style="font-size:15px;line-height:1.5;color:#333">GPU-кластеры, сеть, питание и жидкостное охлаждение. Обычный ЦОД под ИИ «заточить» почти не получится.</div><div class="lbl" style="font-size:10px">Когда нужно: модели переезжают в свой контур</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема журналирования]</div><div style="font-weight:600;font-size:21px">ИИ как «цифровой самописец»</div><div style="font-size:15px;line-height:1.5;color:#333">Версии данных и моделей, журналы действий, возможность откатить или остановить модель.</div><div class="lbl" style="font-size:10px">Когда нужно: готовиться к ответственности за ущерб от ИИ</div></a>
+</div>
+</section>
+
+<section id="services" class="wrap sec">
+<div class="ann">05 · Чем реализуем — услуги из каталога</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Чем реализуем</h2><a href="#" style="font-size:15px;font-weight:500">Весь каталог →</a></div>
+<div class="g2" style="margin-top:32px;gap:0 48px;border-top:1px solid #111">
+<a class="svc" href="#">Корпоративный GPT и большие языковые модели<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Jet &amp; Yandex AI Lab: прототипы ИИ-агентов<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Озёра и хранилища данных, Lakehouse<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Data Governance и Data Catalog<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">MLOps: жизненный цикл моделей<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Компьютерное зрение и видеоаналитика<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Прогнозные и рекомендательные сервисы<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Проектирование ЦОД высокой плотности<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<section id="proof" class="wrap sec">
+<div class="ann">06 · Доказательства: проекты и замеры</div>
+<h2 class="h2">Доказательства</h2>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="lbl">Сами у себя · Разработка</div><div class="serif num" style="font-size:52px;white-space:nowrap">1,5×</div><div style="font-size:17px;line-height:1.4">больше закрытых story points у команды с ИИ — с разделом «что мы можем и не можем утверждать»</div><span class="ans">Как считали →</span></a>
+<a class="card" href="#"><div class="lbl">Сами у себя · Бухгалтерия</div><div class="serif num" style="font-size:52px;white-space:nowrap">3000+</div><div style="font-size:17px;line-height:1.4">платёжных документов в месяц разбирает ассистент. 100% точности на продуктиве не сохранились — и это нормально</div><span class="ans">Что вышло →</span></a>
+<a class="card" href="#"><div class="lbl">Данные · Проект</div><div class="serif num" style="font-size:52px;white-space:nowrap">2 дня → 2 ч</div><div style="font-size:17px;line-height:1.4">новая трансформация данных с агентным кодингом; новый плагин источника — за день вместо пяти</div><span class="ans">Подробнее →</span></a>
+</div>
+</section>
+
+<section id="case" class="wrap sec"><div class="hx-sh"><div class="lbl">Разбор кейса</div><h2 class="hx-h2">ИИ в команде разработки: в 1,5 раза больше закрытых задач</h2></div><div class="hx-case"><div class="l"><div class="lbl">Разработка · замер на спринтах</div><div class="hx-part"><div class="lbl">Задача</div><p>Проверить на своей команде, что ИИ-ассистенты действительно ускоряют разработку, — без маркетинговых «в 5 раз».</p></div><div class="hx-part"><div class="lbl">Что сделали</div><p>Подключили ИИ-инструменты к работе команды и сравнили закрытые story points по спринтам до и после.</p></div><div class="hx-part"><div class="lbl">Результат</div><p>Ручного кода стало меньше, закрытых задач — больше. Результаты и ограничения подробно разобрали на Хабре.</p></div></div><div class="rr"><div><div class="num">1,5×</div><div class="c">больше закрытых story points</div></div><div><div class="num">10–18 → 17–23</div><div class="c">задачи за спринт</div></div><div><div class="num">3000+</div><div class="c">платёжных документов в месяц обрабатывает наш ассистент бухгалтерии</div></div></div></div></section>
+<section id="expertise" class="wrap sec">
+<div class="ann">07 · Экспертиза: исследования и мнение</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap">
+<div style="flex:1 1 560px;min-width:0">
+<h2 class="h2">Экспертиза</h2>
+<div style="margin-top:32px;border-top:1px solid #111">
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Исследование · 2026</span>ИИ-зрелость крупного бизнеса в России</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Колонка</span>Почему корпоративный ИИ буксует на полпути к агентам</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Хабр · инженерный кейс</span>Как мы отдали ИИ в «рабство» бухгалтерии и что из этого вышло</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Колонка</span>Как ИИ неожиданно оказался тестом на качество управления</span><span aria-hidden="true">→</span></a>
+</div>
+</div>
+<aside style="flex:0 1 380px;border-top:2px solid #111;padding-top:20px">
+<div class="lbl" style="color:#111">Мнение</div>
+<p class="serif" style="font-style:italic;font-size:24px;line-height:1.35;margin:16px 0 0">«Без цифрового следа и данных искусственный интеллект не знает ничего о компании и её бизнес-процессах»</p>
+<div style="display:flex;align-items:center;gap:12px;margin-top:20px"><div style="width:44px;height:44px;border-radius:50%;background:#D4F53C;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">МА</div><div style="font-size:14px"><div style="font-weight:600">Максим Андрианов</div><div style="color:#5c5c5c">директор Дирекции разработки и внедрения ПО</div></div></div>
+</aside>
+</div>
+</section>
+
+<section class="wrap" style="padding-top:64px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;border-top:1px solid #111;border-bottom:1px solid #111;padding:24px 0">
+<div class="lbl" style="color:#111">Экспертиза как сервис</div>
+<div style="flex:1 1 420px;font-size:18px;font-weight:500">450+ архитекторов, аналитиков, data scientists и ML-инженеров — в вашем проекте, от прототипа до прода.</div>
+<a href="#" style="font-size:15px;font-weight:500">Подробнее →</a>
+</div>
+</section>
+
+<section id="check" class="wrap sec"><div class="hx-sh"><div class="lbl">Самопроверка</div><h2 class="hx-h2">Шесть вопросов, на которые стоит ответить до проекта</h2></div><div class="hx-check"><div><div class="hx-ci"><i></i><span>Оцифрован ли процесс, который вы хотите отдать ИИ, — или решения принимаются в мессенджерах и на планёрках?</span></div><div class="hx-ci"><i></i><span>Где хранятся данные процесса и хватит ли их объёма для дообучения?</span></div><div class="hx-ci"><i></i><span>Есть ли API у систем, с которыми должен работать агент?</span></div><div class="hx-ci"><i></i><span>Назначен ли владелец из бизнеса, который отвечает за метрики эффекта?</span></div><div class="hx-ci"><i></i><span>Посчитана ли стоимость промышленной эксплуатации — токены, GPU, поддержка?</span></div><div class="hx-ci"><i></i><span>Решено ли, где обрабатывать персональные данные и коммерческую тайну?</span></div></div><div class="hx-res"><div class="lbl">Как читать результат</div><p style="font-size:17px;line-height:1.5;margin:12px 0 20px">Если на первые три вопроса ответ «нет», начинать стоит с AI-ready фундамента, а не с выбора модели.</p><a class="btn btn-p" href="self-assessment.html">Пройти полную самооценку</a></div></div></section>
+<section id="faq" class="wrap sec"><div class="hx-sh"><div class="lbl">Вопросы</div><h2 class="hx-h2">Частые вопросы</h2></div><div class="hx-faq"><details class="hx-fq" open=""><summary>Облако или свой контур?</summary><p>Для пилотов и некритичных задач — облачные платформы российских вендоров. Для коммерческой тайны и персональных данных — open-source модели в своём контуре, обычно на 5–10 картах NVIDIA H100.</p></details><details class="hx-fq"><summary>Где ИИ уже приносит пользу?</summary><p>Там, где есть цифровой след: поддержка клиентов и сотрудников (75% компаний), аналитика и BI (63%), ИТ-служба. Растут маркетинг, продажи и HR.</p></details><details class="hx-fq"><summary>Почему пилоты не доходят до денег?</summary><p>46% компаний не видят устойчивого экономического эффекта. Пилот на подготовленном участке выглядит хорошо, а при масштабировании упирается в ту часть компании, где цифровизации нет.</p></details><details class="hx-fq"><summary>А галлюцинации?</summary><p>Нестабильное качество моделей смущает почти 40% компаний. Поэтому агентам доверяют рекомендации и решения с низким риском — классификацию обращений, извлечение данных из документов.</p></details><details class="hx-fq"><summary>С чего начать?</summary><p>С оценки готовности: процессы, данные, интеграции, владелец, экономика. Затем — прототип в лаборатории, и только потом инвестиции в железо.</p></details></div></section>
+<section id="contact" class="wrap sec">
+<div class="ann">08 · Эксперт и форма</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid #111;padding-top:40px">
+<div style="flex:1 1 380px;display:flex;gap:24px;min-width:0">
+<div class="ph" style="flex:0 0 140px;height:180px">[фото эксперта]</div>
+<div><h2 class="h2" style="font-size:32px">Обсудите вашу задачу с экспертом</h2><div style="font-weight:600;margin-top:16px">Максим Андрианов</div><div style="font-size:14px;color:#5c5c5c;margin-top:4px">директор Дирекции разработки и внедрения ПО</div></div>
+</div>
+<form style="flex:1 1 480px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<label class="field">Имя<input type="text"></label>
+<label class="field">Компания<input type="text"></label>
+<label class="field">Телефон или e-mail<input type="text"></label>
+<label class="field">Должность<input type="text"></label>
+<label class="field" style="grid-column:1/-1">Какой процесс хотите отдать ИИ и кто за него отвечает в бизнесе?<textarea style="min-height:96px;padding:12px"></textarea></label>
+<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span style="font-size:12px;color:#5c5c5c">Нажимая «Отправить», вы соглашаетесь с политикой обработки данных</span><button class="btn btn-p" type="button">Отправить</button></div>
+</form>
+</div>
+</section>
+
+<section class="wrap sec">
+<div class="ann">09 · Связанные вызовы</div>
+<div class="lbl" style="color:#111">Другие вызовы</div>
+<div class="g3" style="margin-top:20px;row-gap:0">
+<a class="svc" href="hub-kiber.html">Киберустойчивость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-containers.html">Контейнеры и open source<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-import.html">Импортонезависимость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-decentral.html">Децентрализация<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-dc.html">Свои ЦОД<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai.html" style="color:#fff">ИИ</a><a href="hub-containers.html" style="color:#fff">Контейнеры и open source</a><a href="hub-import.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral.html" style="color:#fff">Децентрализация</a><a href="hub-dc.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog.html" style="color:#fff">Услуги и решения</a><a href="industry.html" style="color:#fff">По отраслям</a><a href="diagnostics.html" style="color:#fff">Диагностика</a><a href="projects.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about.html" style="color:#fff">О компании</a><a href="method.html" style="color:#fff">Как мы работаем</a><a href="expertise.html" style="color:#fff">Центр экспертизы</a><a href="career.html" style="color:#fff">Карьера</a><a href="press.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts.html" style="color:#fff">Контакты и офисы</a><a href="contacts.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

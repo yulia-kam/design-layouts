@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — Импортонезависимость</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{padding:20px 0;border-top:1px solid #111}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff}
+.myth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #111}
+.myth>div{padding:18px 24px 20px 0;border-bottom:1px solid #e0e0e0}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3,.myth{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:0 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:14px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:0 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 180px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:18px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:32px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px}
+.hx-res{border:2px solid #111;border-radius:4px;padding:28px;position:sticky;top:80px}
+.hx-faq{margin-top:32px;border-top:1px solid #111}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";font-weight:400;color:#5c5c5c}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0;max-width:900px}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:84px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:32px}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+
+<header class="wrap hdr">
+<div class="hdr-sp" style="display:flex;align-items:center;justify-content:flex-start"><a class="btn btn-l" href="#vzlom">Вас взломали?</a></div>
+<a href="Main.html" aria-label="Инфосистемы Джет — на главную" style="display:flex;align-items:center;justify-content:center;min-width:0"><img class="logo" src="assets/logo.svg" alt="Инфосистемы Джет"></a>
+<div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+<button class="ibtn" aria-label="Поиск по сайту"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></button>
+<a class="ibtn hide-m" href="#en" style="color:#111">EN</a>
+<button class="ibtn" aria-label="Открыть меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"></path></svg><span class="hide-m">Меню</span></button>
+</div>
+</header>
+<nav class="rubr" aria-label="Рубрики">
+<div class="wrap rubr-in">
+<a href="Main.html">Главное</a>
+<a href="hub-kiber.html">Киберустойчивость</a>
+<a href="hub-ai.html">ИИ</a>
+<a href="hub-containers.html">Контейнеры и open source</a>
+<a href="hub-import.html" style="border-bottom:2px solid #111">Импортонезависимость</a>
+<a href="hub-decentral.html">Децентрализация</a>
+<a href="hub-dc.html">Свои ЦОД</a>
+<span style="color:#b8b8b8" aria-hidden="true">|</span>
+<a href="diagnostics.html">Диагностика</a><a href="projects.html">Проекты</a><a href="expertise.html">Центр экспертизы</a>
+</div>
+</nav>
+
+<nav class="secnav" aria-label="Разделы страницы">
+<a href="#problem">Проблема</a><a href="#myths">Реальность</a><a href="#answer">Наш ответ</a><a href="#how">Как это устроено</a><a href="#arch">Архитектуры</a><a href="#services">Чем реализуем</a><a href="#proof">Доказательства</a><a href="#case">Кейс</a><a href="#expertise">Экспертиза</a><a href="#check">Самопроверка</a><a href="#faq">Вопросы</a><a href="#contact" style="background:#D4F53C;color:#111">Обсудить</a>
+</nav>
+
+<section class="wrap" style="padding-top:24px">
+<div class="lbl" style="font-size:12px"><a href="Main.html" style="color:#5c5c5c">Главная</a> / <a href="vyzovy.html" style="color:#5c5c5c">Вызовы</a> / <span style="color:#111">Импортонезависимость</span></div>
+<div class="ann" style="margin-top:24px">01 · Первый экран: проверочный вопрос → переформулировка → цифра</div>
+<div style="display:flex;gap:40px;align-items:stretch;flex-wrap:wrap">
+<div style="flex:1 1 640px;min-width:0">
+<div class="lbl" style="color:#111">Проверочный вопрос руководителю</div>
+<p class="serif" style="font-style:italic;font-size:22px;line-height:1.35;color:#333;margin:10px 0 0">Всё купили из реестра. Почему оно не работает вместе?</p>
+<h1 class="h1" style="margin:24px 0 0;font-size:60px;line-height:1.04;font-weight:700;letter-spacing:-.025em">Российский стек куплен по реестру.<br><span class="mark">Вместе он не работает.</span></h1>
+<p style="font-size:19px;line-height:1.5;color:#333;margin:24px 0 0;max-width:700px">Только систем виртуализации в реестре под сотню. Но заявленная совместимость — лабораторный факт на момент теста. В инфраструктуре, где десятки продуктов обновляются каждый в своём ритме, работает только проверенная. Мы проверяем связки вживую, до внедрения, и переводим на них поэтапно, без остановки бизнеса.</p>
+<div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap"><a class="btn btn-p" href="#">Проверить совместимость</a><a class="btn" href="#contact">Поговорить с экспертом</a></div>
+</div>
+<div class="blue" style="flex:0 1 360px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;box-sizing:border-box">
+<div class="lbl" style="color:#dfe5ff">Цифра, с которой начинаем разговор</div>
+<div><div class="serif" style="font-size:96px;line-height:1;font-weight:700">×4</div><div style="font-size:16px;line-height:1.45;margin-top:12px;color:#eef1ff">выросло число наших проектов по переходу на российские продукты с 2022 года</div></div>
+<div class="lbl" style="color:#dfe5ff">«Инфосистемы Джет»</div>
+</div>
+</div>
+</section>
+
+<section id="problem" class="wrap sec">
+<div class="ann">02 · Проблема — мифы и реальность</div>
+<h2 class="h2">Что изменилось</h2>
+<p style="font-size:18px;line-height:1.5;color:#333;margin:16px 0 0;max-width:760px">Рынок взрослеет: начинается «замещение импортозамещения». Бизнес пересматривает внедрения двух-трёхлетней давности и больше не берёт, что дают, — он выбирает.</p>
+<div class="myth" style="margin-top:32px">
+<div><div class="lbl">Миф</div><div style="font-size:18px;font-weight:600;margin-top:8px">Продукт в реестре — значит, подходит для инфраструктуры</div></div>
+<div><div class="lbl">Реальность</div><div style="font-size:17px;line-height:1.5;margin-top:8px">Реестровая запись — не про нагрузку и не про отказоустойчивость. Как продукт поведёт себя под реальной нагрузкой, вопрос открытый.</div></div>
+<div><div class="lbl">Миф</div><div style="font-size:18px;font-weight:600;margin-top:8px">Импортозамещение — это замена одного продукта другим</div></div>
+<div><div class="lbl">Реальность</div><div style="font-size:17px;line-height:1.5;margin-top:8px">Это перестройка всей инфраструктуры и модели её эксплуатации. Сложные инциденты рождаются на стыке технологий, где каждый вендор отвечает только за своё.</div></div>
+<div><div class="lbl">Миф</div><div style="font-size:18px;font-weight:600;margin-top:8px">Это задача только ИТ-отдела</div></div>
+<div><div class="lbl">Реальность</div><div style="font-size:17px;line-height:1.5;margin-top:8px">Пользователей нужно переучивать, а людей с экспертизой мало. Когда обещанная быстрая замена тянется годами, бизнес перестаёт доверять ИТ.</div></div>
+</div>
+<div class="g3" style="margin-top:48px">
+<div class="fact"><div class="serif num">80–90%</div><div style="font-size:15px;margin-top:10px">потребностей в инфраструктурных сегментах уже закрывают российские производители</div><div class="lbl" style="font-size:10px;margin-top:6px">Оценка «Инфосистемы Джет»</div></div>
+<div class="fact"><div class="serif num">84%</div><div style="font-size:15px;margin-top:10px">компаний ищут senior-специалистов полгода и дольше</div><div class="lbl" style="font-size:10px;margin-top:6px">Исследование зрелости ИТ · 2025</div></div>
+<div class="fact"><div class="serif num">~35%</div><div style="font-size:15px;margin-top:10px">подорожало за год оборудование российских производителей</div><div class="lbl" style="font-size:10px;margin-top:6px">Наблюдение экспертов Джета</div></div>
+</div>
+</section>
+
+<section id="myths" class="wrap sec"><div class="hx-sh"><div class="lbl">Реальность</div><h2 class="hx-h2">Где рынок готов, а где нет</h2></div><div style="margin-top:32px"><div class="hx-myth" style="padding:12px 0;border-bottom:1px solid #111"><div class="lbl">Направление</div><div class="lbl">Готовность</div><div class="lbl">Что на практике</div></div><div class="hx-myth"><div class="m">Серверы стандартного класса</div><div class="v">80–90%</div><div class="r">потребностей рынка в инфраструктурных сегментах закрывают российские производители. Двухсокетные серверы — почти полностью.</div></div><div class="hx-myth"><div class="m">Виртуализация и мониторинг</div><div class="v">готово</div><div class="r">Миграция проходит наиболее беспроблемно, решения достаточно зрелые. Сотни хостов в банке работают стабильно больше года.</div></div><div class="hx-myth"><div class="m">СУБД уровня Oracle</div><div class="v" style="color:#111">сложно</div><div class="r">Прямых аналогов нет. Систему часто приходится разбивать на подсистемы или перепроектировать.</div></div><div class="hx-myth"><div class="m">Резервное копирование и каталоги</div><div class="v" style="color:#111">сложно</div><div class="r">Несовместимость российских СРК с оставшимися западными платформами; службы каталогов на разной технологической базе.</div></div><div class="hx-myth"><div class="m">High-end серверы и СХД</div><div class="v" style="color:#c2410c">нет</div><div class="r">Российских решений с RoCE и NVMe-over-Fabrics. Нет или только появляются ленточные библиотеки, балансировщики L3–L4, MDM.</div></div></div><div class="cap" style="margin-top:14px">Оценка зрелости рынка экспертами «Инфосистемы Джет», 2026</div></section>
+<section id="answer" class="wrap sec">
+<div class="ann">03 · Наш ответ — идеи решения, без продуктов</div>
+<h2 class="h2">Наш ответ</h2>
+<div class="g2" style="margin-top:40px;gap:48px">
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">1</div><div style="font-weight:600;font-size:24px;margin-top:16px">Проверять вживую, а не по документации</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">В среде, максимально близкой к боевой. Отключили диск — что будет? Вывели из строя половину узлов СУБД — система восстановилась? Это даёт гораздо больше, чем функциональные тесты.</p></div>
+<div style="border-top:2px solid #1E3BD6;padding-top:20px"><div class="serif num" style="font-size:56px">2</div><div style="font-weight:600;font-size:24px;margin-top:16px">Переводить поэтапно</div><p style="font-size:17px;line-height:1.55;color:#333;margin:10px 0 0">Сначала аудит, потом замена модулей, начиная с наименее критичных. Старые системы работают, пока новые не встанут на рельсы. Кто экономит на тестировании, потом платит простоями или переделками.</p></div>
+</div>
+</section>
+
+<section id="how" class="wrap sec"><div class="hx-sh"><div class="lbl">Как это происходит</div><h2 class="hx-h2">Как переходим на российский стек без остановки бизнеса</h2><p class="hx-lead">Без остановки бизнеса переход возможен при одном условии: если компания готова инвестировать в предварительное тестирование и поэтапное внедрение. Те, кто экономит на этом, платят больше — простоями или переделками.</p></div><div class="hx-steps"><div class="hx-step"><span class="hx-n">01</span><b>Обследование</b><p>Инфраструктура и информационные системы, в том числе значимые объекты КИИ, и требования регуляторов к ним.</p></div><div class="hx-step"><span class="hx-n">02</span><b>Требования до функций</b><p>Для тяжёлых систем вроде Oracle прямой замены нет: детализируем требования до конкретных функций и только потом подбираем решение.</p></div><div class="hx-step"><span class="hx-n">03</span><b>Дорожная карта</b><p>Бюджеты, сроки, приоритеты, целевой ИТ-ландшафт и метод миграции для каждой системы.</p></div><div class="hx-step"><span class="hx-n">04</span><b>Проверка связок в Jet RuLab</b><p>Отключили диск — что будет? Вывели из строя половину узлов СУБД — система восстановилась? Это даёт больше, чем функциональные тесты.</p></div><div class="hx-step"><span class="hx-n">05</span><b>Поэтапная миграция</b><p>Сначала наименее критичные модули. Старые системы живут, пока новые не встанут на рельсы.</p></div></div><div class="hx-duo"><div class="hx-q"><p>«Импортозамещение тормозит не отсутствие отечественных аналогов. Проблема в другом: как собрать из всего этого работающую конструкцию»</p><div class="hx-who"><b style="color:#111">Павел Тесленко</b>, руководитель направления ИТ- и бизнес-консалтинга</div></div><div class="hx-note"><div class="lbl" style="color:#D4F53C">Совместимость</div><p>Многие вендоры заявляют совместимость, но на деле она работает для конкретных версий в лаборатории. Бывает, что ОС и каталог пользователей одного производителя теряют совместимость после обновления.</p><div class="hx-who">Павел Тесленко</div></div></div></section>
+<section id="arch" class="wrap sec">
+<div class="ann">04 · Архитектуры ответа → страницы третьего уровня</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Как решаем</h2><span class="lbl">6 архитектур</span></div>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="ph" style="height:150px">[фото лаборатории]</div><div style="font-weight:600;font-size:21px">Лаборатория совместимости Jet RuLab</div><div style="font-size:15px;line-height:1.5;color:#333">7 кластеров оборудования разных производителей и 100+ продуктов. Проверяем не продукт, а связку в составе кластера.</div><div class="lbl" style="font-size:10px">Когда нужно: выбор между несколькими вендорами</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема испытаний]</div><div style="font-weight:600;font-size:21px">Независимые испытания по открытой методике</div><div style="font-size:15px;line-height:1.5;color:#333">NGFW: 9 нагрузочных и 264 функциональных теста. Управление уязвимостями: 94 критерия.</div><div class="lbl" style="font-size:10px">Когда нужно: перед крупной закупкой средств защиты</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[дорожная карта]</div><div style="font-weight:600;font-size:21px">Миграция с VMware</div><div style="font-size:15px;line-height:1.5;color:#333">Самый массовый запрос. Выбор платформы под ваши нагрузки и перенос без остановки сервисов.</div><div class="lbl" style="font-size:10px">Когда нужно: заканчивается поддержка</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[дорожная карта]</div><div style="font-weight:600;font-size:21px">Уход с тяжёлых СУБД</div><div style="font-size:15px;line-height:1.5;color:#333">Прямых аналогов Oracle нет. Детализируем требования до функций и часто делим систему на несколько подсистем.</div><div class="lbl" style="font-size:10px">Когда нужно: критичная база без поддержки</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема каталога]</div><div style="font-weight:600;font-size:21px">Замена службы каталогов</div><div style="font-size:15px;line-height:1.5;color:#333">Samba DC, FreeIPA или проприетарное решение — это выбор архитектурной философии, а не просто продукта.</div><div class="lbl" style="font-size:10px">Когда нужно: уход с Microsoft Active Directory</div></a>
+<a class="card" href="#"><div class="ph" style="height:150px">[схема рабочих мест]</div><div style="font-weight:600;font-size:21px">Рабочие места и коммуникации</div><div style="font-size:15px;line-height:1.5;color:#333">VDI, почта, ВКС и мессенджеры, которые действительно связаны между собой. Проверено в шоуруме и на себе.</div><div class="lbl" style="font-size:10px">Когда нужно: тысячи пользователей</div></a>
+</div>
+</section>
+
+<section id="services" class="wrap sec">
+<div class="ann">05 · Чем реализуем — услуги из каталога</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Чем реализуем</h2><a href="#" style="font-size:15px;font-weight:500">Весь каталог →</a></div>
+<div class="g2" style="margin-top:32px;gap:0 48px;border-top:1px solid #111">
+<a class="svc" href="#">Импортозамещение в ИТ-инфраструктуре<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Лаборатория российских ИТ-решений Jet RuLab<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Миграция ИТ-систем, данных и пользователей<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">PostgreSQL в Enterprise<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Виртуализация рабочих мест (VDI)<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Шоурум отечественных UC-решений<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Комплексная поддержка гибридной инфраструктуры<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Собственные продукты в реестре российского ПО<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<section id="proof" class="wrap sec">
+<div class="ann">06 · Доказательства: проекты и испытания</div>
+<h2 class="h2">Доказательства</h2>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="#"><div class="lbl">Энергетика · «Гринатом»</div><div class="serif num" style="font-size:52px;white-space:nowrap">5 500</div><div style="font-size:17px;line-height:1.4">одновременных пользователей VDI — цель проекта на отечественном стеке. Готового решения на рынке не было: собирали экосистему. Премия ЦИПР Диджитал 2025</div><span class="ans">Как собирали →</span></a>
+<a class="card" href="#"><div class="lbl">Финансы · Виртуализация</div><div class="serif num" style="font-size:52px;white-space:nowrap">−25%</div><div style="font-size:17px;line-height:1.4">расходов на ПО после перехода банка на новую платформу виртуализации — сотни хостов</div><span class="ans">Подробнее →</span></a>
+<a class="card" href="#"><div class="lbl">Сами у себя · ВКС</div><div class="serif num" style="font-size:52px;white-space:nowrap">9 → 1</div><div style="font-size:17px;line-height:1.4">сравнили 9 платформ по 60+ критериям и заменили две иностранные одной российской. 2000+ сотрудников, 18 000 встреч в месяц</div><span class="ans">Как выбирали →</span></a>
+</div>
+</section>
+
+<section id="case" class="wrap sec"><div class="hx-sh"><div class="lbl">Разбор кейса</div><h2 class="hx-h2">Сотни хостов на российской платформе — и −25% расходов на ПО</h2></div><div class="hx-case"><div class="l"><div class="lbl">Банк · Виртуализация</div><div class="hx-part"><div class="lbl">Задача</div><p>Заменить платформу виртуализации в банке. Заказчик сомневался в производительности и надёжности российского решения.</p></div><div class="hx-part"><div class="lbl">Что сделали</div><p>Проверили связку на стенде, развернули несколько сотен хостов, перенесли нагрузку поэтапно.</p></div><div class="hx-part"><div class="lbl">Результат</div><p>Система стабильно работает больше года. Параллельно банк перешёл на платформенный подход к разработке.</p></div></div><div class="rr"><div><div class="num">−25%</div><div class="c">расходов на программное обеспечение</div></div><div><div class="num">сотни</div><div class="c">хостов на российской виртуализации</div></div><div><div class="num">5 500</div><div class="c">виртуальных рабочих мест на отечественном стеке — цель проекта «Гринатома»</div></div></div></div></section>
+<section id="expertise" class="wrap sec">
+<div class="ann">07 · Экспертиза: исследования и мнение</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap">
+<div style="flex:1 1 560px;min-width:0">
+<h2 class="h2">Экспертиза</h2>
+<div style="margin-top:32px;border-top:1px solid #111">
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Комментарий · мифы и реальность</span>Импортонезависимая ИТ-инфраструктура: сложности создания</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Хабр · инженерный кейс</span>Замещать нельзя интегрировать: процесс изысканий на новой платформе</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">JETINFO · «Импортозамещение»</span>Сапожник в сапогах: импортозамещение в самом Джете</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Колонка</span>От дефицита к выбору: как меняется рынок серверов</span><span aria-hidden="true">→</span></a>
+</div>
+</div>
+<aside style="flex:0 1 380px;border-top:2px solid #111;padding-top:20px">
+<div class="lbl" style="color:#111">Мнение</div>
+<p class="serif" style="font-style:italic;font-size:24px;line-height:1.35;margin:16px 0 0">«Импортозамещение тормозит не отсутствие отечественных аналогов. Проблема в другом: как собрать из всего этого работающую конструкцию»</p>
+<div style="display:flex;align-items:center;gap:12px;margin-top:20px"><div style="width:44px;height:44px;border-radius:50%;background:#D4F53C;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">ПТ</div><div style="font-size:14px"><div style="font-weight:600">Павел Тесленко</div><div style="color:#5c5c5c">руководитель направления ИТ- и бизнес-консалтинга</div></div></div>
+</aside>
+</div>
+</section>
+
+<section class="wrap" style="padding-top:64px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;border-top:1px solid #111;border-bottom:1px solid #111;padding:24px 0">
+<div class="lbl" style="color:#111">Экспертиза как сервис</div>
+<div style="flex:1 1 420px;font-size:18px;font-weight:500">Поддержка всего гибридного стека одним партнёром — без «слепых зон» между вендорами.</div>
+<a href="#" style="font-size:15px;font-weight:500">Подробнее →</a>
+</div>
+</section>
+
+<section id="check" class="wrap sec"><div class="hx-sh"><div class="lbl">Самопроверка</div><h2 class="hx-h2">Шесть вопросов, на которые стоит ответить до проекта</h2></div><div class="hx-check"><div><div class="hx-ci"><i></i><span>Проведена ли инвентаризация систем, относящихся к значимым объектам КИИ?</span></div><div class="hx-ci"><i></i><span>Есть ли дорожная карта с бюджетами, сроками и приоритетами?</span></div><div class="hx-ci"><i></i><span>Проверяли ли вы связку продуктов вживую — или полагаетесь на заявления вендоров?</span></div><div class="hx-ci"><i></i><span>Совместимы ли агенты резервного копирования с вашими приложениями и ОС?</span></div><div class="hx-ci"><i></i><span>Есть ли в команде люди, которые знают Linux и инструменты автоматизации?</span></div><div class="hx-ci"><i></i><span>Расписано ли, как старая система будет работать параллельно с новой?</span></div></div><div class="hx-res"><div class="lbl">Как читать результат</div><p style="font-size:17px;line-height:1.5;margin:12px 0 20px">У 84% организаций подбор специалистов уровня senior занимает полгода и больше — кадровый вопрос стоит решать вместе с технологическим.</p><a class="btn btn-p" href="self-assessment.html">Пройти полную самооценку</a></div></div></section>
+<section id="faq" class="wrap sec"><div class="hx-sh"><div class="lbl">Вопросы</div><h2 class="hx-h2">Частые вопросы</h2></div><div class="hx-faq"><details class="hx-fq" open=""><summary>Сколько российских платформ виртуализации на рынке?</summary><p>Около 30 платформ появилось после ухода VMware, в реестре систем виртуализации — под сотню. Лидеры уже выделяются, рынок движется к консолидации.</p></details><details class="hx-fq"><summary>Как мигрировать с Oracle?</summary><p>Не «один к одному»: детализировать требования до функций, при необходимости разбить систему на подсистемы и перенести логику, схемы и данные поэтапно.</p></details><details class="hx-fq"><summary>Можно ли перейти без остановки бизнеса?</summary><p>Да, если старые и новые системы работают параллельно, а каждая связка проверена на стенде до внедрения.</p></details><details class="hx-fq"><summary>Подорожало ли оборудование?</summary><p>Российское оборудование за год подорожало в среднем примерно на 35%. Это стоит закладывать в дорожную карту.</p></details><details class="hx-fq"><summary>Что с кадрами?</summary><p>Знаний Windows-администратора уже недостаточно. Нужны Linux, инфраструктурные сервисы и автоматизация — особенно не хватает DevOps-инженеров, специалистов по мониторингу и базам данных.</p></details></div></section>
+<section id="contact" class="wrap sec">
+<div class="ann">08 · Эксперт и форма</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid #111;padding-top:40px">
+<div style="flex:1 1 380px;display:flex;gap:24px;min-width:0">
+<div class="ph" style="flex:0 0 140px;height:180px">[фото эксперта]</div>
+<div><h2 class="h2" style="font-size:32px">Обсудите ваш переход с экспертом</h2><div style="font-weight:600;margin-top:16px">Павел Тесленко</div><div style="font-size:14px;color:#5c5c5c;margin-top:4px">руководитель направления ИТ- и бизнес-консалтинга</div></div>
+</div>
+<form style="flex:1 1 480px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<label class="field">Имя<input type="text"></label>
+<label class="field">Компания<input type="text"></label>
+<label class="field">Телефон или e-mail<input type="text"></label>
+<label class="field">Должность<input type="text"></label>
+<label class="field" style="grid-column:1/-1">Что переводите и что уже пробовали?<textarea style="min-height:96px;padding:12px"></textarea></label>
+<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span style="font-size:12px;color:#5c5c5c">Нажимая «Отправить», вы соглашаетесь с политикой обработки данных</span><button class="btn btn-p" type="button">Отправить</button></div>
+</form>
+</div>
+</section>
+
+<section class="wrap sec">
+<div class="ann">09 · Связанные вызовы</div>
+<div class="lbl" style="color:#111">Другие вызовы</div>
+<div class="g3" style="margin-top:20px;row-gap:0">
+<a class="svc" href="hub-kiber.html">Киберустойчивость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-ai.html">ИИ в инфраструктуре и бизнесе<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-containers.html">Контейнеры и open source<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-decentral.html">Децентрализация<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-dc.html">Свои ЦОД<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai.html" style="color:#fff">ИИ</a><a href="hub-containers.html" style="color:#fff">Контейнеры и open source</a><a href="hub-import.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral.html" style="color:#fff">Децентрализация</a><a href="hub-dc.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog.html" style="color:#fff">Услуги и решения</a><a href="industry.html" style="color:#fff">По отраслям</a><a href="diagnostics.html" style="color:#fff">Диагностика</a><a href="projects.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about.html" style="color:#fff">О компании</a><a href="method.html" style="color:#fff">Как мы работаем</a><a href="expertise.html" style="color:#fff">Центр экспертизы</a><a href="career.html" style="color:#fff">Карьера</a><a href="press.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts.html" style="color:#fff">Контакты и офисы</a><a href="contacts.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>

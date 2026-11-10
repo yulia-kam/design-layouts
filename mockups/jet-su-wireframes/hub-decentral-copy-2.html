@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хаб — Децентрализация</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=PT+Serif:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1E3BD6;text-decoration:none}a:hover{color:#122a9e;text-decoration:underline}
+.wrap{max-width:1440px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c}
+.ann{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5c5c5c;border:1px dashed #9c9c9c;padding:2px 6px;margin-bottom:16px}
+.serif{font-family:'PT Serif',Georgia,serif}
+.tbd{background:#fff1a8;color:#111;padding:0 3px}
+.ph{background:#efefef;border:1px dashed #b8b8b8;display:flex;align-items:center;justify-content:center;text-align:center;color:#5c5c5c;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;padding:16px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid #111;font-size:15px;font-weight:500;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;color:#111;background:#f4f4f4}
+.btn-p{background:#1E3BD6;color:#fff;border-color:#1E3BD6}.btn-p:hover{background:#1830b0;color:#fff}
+.btn-l{background:#D4F53C;color:#111;border-color:#D4F53C}.btn-l:hover{background:#c4e52c}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;border:0;background:transparent;color:#111;cursor:pointer;font:500 15px 'Inter',sans-serif;padding:0 8px}
+.mark{background:linear-gradient(transparent 58%,#D4F53C 58%)}
+.g2,.g3{display:grid;gap:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sec{padding-top:110px}
+.h2{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.01em;margin:0}
+.card{display:flex;flex-direction:column;gap:12px;padding:20px 0 24px;border-top:1px solid #cfcfcf;color:#111}
+.card:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.num{font-size:44px;line-height:1;font-weight:700;color:#1E3BD6}
+.ans{font-size:15px;font-weight:500;color:#1E3BD6}
+.blue{background:#1E3BD6;color:#fff}
+.rubr{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid #111;border-bottom:1px solid #e0e0e0}
+.rubr-in{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;padding:10px 0;font-size:13.5px}
+.rubr-in a{color:#111;padding:6px 0}
+.svc{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #e0e0e0;color:#111;font-size:17px}
+.svc:hover{background:#f6f6f6;text-decoration:none;color:#111}
+.fact{padding:20px 0;border-top:1px solid #111}
+.secnav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;display:flex;gap:4px;background:#111;padding:6px;max-width:calc(100% - 32px);overflow-x:auto;box-sizing:border-box}
+.secnav a{color:#fff;font-size:13px;padding:10px 14px;white-space:nowrap}
+.secnav a:hover{background:#333;text-decoration:none;color:#fff}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#333}
+.field input,.field textarea{border:1px solid #bdbdbd;min-height:44px;padding:0 12px;font:15px 'Inter',sans-serif;box-sizing:border-box;background:#fff}
+@media (max-width:900px){.wrap{padding:0 16px}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}.h1{font-size:40px!important}.h2{font-size:30px}.hide-m{display:none}}
+@media (max-width:600px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+
+/* общий стиль — как на главной */
+.ann,.foldline{display:none!important}
+a:hover{text-decoration:none}
+.lbl{font-size:12px;line-height:1.4}
+.serif{font-family:'Inter',system-ui,sans-serif}
+.serif[style*="italic"],.quote{font-family:'PT Serif',Georgia,serif}
+h1,.h1{font-size:48px!important;line-height:1.1!important;font-weight:500!important;letter-spacing:-.015em!important}
+.h2{font-size:36px!important;line-height:1.15!important;font-weight:600!important}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mark{background:linear-gradient(transparent 60%,#D4F53C 60%)}
+.btn{min-height:48px;padding:0 22px}
+.ph{border:0!important;background:#f1f1f1!important;color:#6b6b6b}
+.card{border:1px solid #d6d6d6!important;border-radius:4px;padding:24px!important;background:#fff;box-sizing:border-box}
+a.card:hover{background:#fff!important;border-color:#111!important}
+.blue{border-radius:4px}
+.rubr{border-top:1px solid #e3e3e3!important;border-bottom:1px solid #e3e3e3!important}
+.rubr-in{gap:4px 28px!important;padding:12px 0!important;font-size:14px!important}
+.rubr-in span[aria-hidden]{display:none}
+.rubr-in a{padding:4px 0!important;border-bottom:2px solid transparent}
+.rubr-in a:hover{border-bottom-color:#111}
+.tl{border-left:0!important;padding-left:0!important}
+.tl-i::before{display:none!important}
+@media (max-width:900px){h1,.h1{font-size:36px!important}.h2{font-size:28px!important}}
+
+/* верстка: поля и навигация по странице */
+.sec{padding-left:56px!important;padding-right:56px!important}
+.secnav{position:static!important;transform:none!important;left:auto!important;bottom:auto!important;max-width:1440px!important;margin:0 auto;padding:0 56px!important;background:#fff!important;gap:28px!important;border-bottom:1px solid #e3e3e3;overflow-x:auto}
+.secnav a{color:#111!important;background:transparent!important;font-size:14px!important;padding:14px 0!important;border-bottom:2px solid transparent}
+.secnav a:hover{border-bottom-color:#111}
+.secnav a:last-child{color:#1E3BD6!important;font-weight:500}
+@media (max-width:900px){.sec{padding-left:16px!important;padding-right:16px!important}.secnav{padding:0 16px!important}}
+
+.cap + .ann + *,.lbl + .ann + *{margin-top:32px!important}
+.blue .serif[style*="font-size:96px"]{font-size:64px!important;letter-spacing:-.02em}
+.g4{display:grid;gap:32px;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav + .ann + *,.subnav + .ann + *{margin-top:40px!important}
+.rubr-in a:nth-last-child(-n+3){color:#5c5c5c}
+
+/* насыщенные разделы хаба */
+.hx-sh{border-top:1px solid #111;padding-top:20px}
+.hx-sh .lbl{color:#111}
+.hx-h2{font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:8px 0 0}
+.hx-lead{font-size:17px;line-height:1.55;color:#3a3a3a;margin:14px 0 0;max-width:760px}
+.hx-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:hx}
+.hx-step{border-top:2px solid #1E3BD6;padding-top:16px}
+.hx-step b{display:block;font-size:17px;line-height:1.3;margin-top:8px}
+.hx-step p{font-size:14.5px;line-height:1.5;color:#3a3a3a;margin:8px 0 0}
+.hx-n{font:600 13px 'IBM Plex Mono',monospace;color:#1E3BD6}
+.hx-duo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;margin-top:32px}
+.hx-q{background:#f5f6fa;border-radius:4px;padding:28px}
+.hx-q p{font-family:'PT Serif',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45;margin:0}
+.hx-note{background:#111;color:#fff;border-radius:4px;padding:28px}
+.hx-note p{font-size:15px;line-height:1.55;margin:10px 0 0;color:#e6e6e6}
+.hx-who{font-size:13px;color:#5c5c5c;margin-top:14px}
+.hx-note .hx-who{color:#a8a8a8}
+.hx-myth{display:grid;grid-template-columns:minmax(0,1fr) 180px minmax(0,1.6fr);gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-myth .m{font-size:18px;font-weight:600;line-height:1.35}
+.hx-myth .v{font-size:32px;font-weight:700;color:#1E3BD6;line-height:1;letter-spacing:-.01em}
+.hx-myth .r{font-size:15px;line-height:1.5;color:#3a3a3a}
+.hx-case{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:40px;border:1px solid #d6d6d6;border-radius:4px;overflow:hidden}
+.hx-case .l{padding:36px}
+.hx-case .rr{background:#1E3BD6;color:#fff;padding:36px;display:flex;flex-direction:column;gap:24px}
+.hx-case .rr .num{color:#fff;font-size:40px;font-weight:700;line-height:1}
+.hx-case .rr .c{font-size:14px;line-height:1.45;color:#dfe5ff;margin-top:6px}
+.hx-part{margin-top:20px}
+.hx-part .lbl{color:#1E3BD6}
+.hx-part p{font-size:16px;line-height:1.55;margin:6px 0 0;color:#222}
+.hx-check{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;margin-top:40px;align-items:start}
+.hx-ci{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #e3e3e3;font-size:16px;line-height:1.45}
+.hx-ci i{flex:0 0 22px;height:22px;border:1.5px solid #111;border-radius:3px;margin-top:1px}
+.hx-res{border:2px solid #111;border-radius:4px;padding:28px;position:sticky;top:80px}
+.hx-faq{margin-top:32px;border-top:1px solid #111}
+.hx-fq{padding:22px 0;border-bottom:1px solid #e3e3e3}
+.hx-fq summary{list-style:none;display:flex;justify-content:space-between;gap:24px;font-size:18px;font-weight:600;cursor:pointer}
+.hx-fq summary::-webkit-details-marker{display:none}
+.hx-fq summary::after{content:"+";font-weight:400;color:#5c5c5c}
+.hx-fq[open] summary::after{content:"−"}
+.hx-fq p{font-size:16px;line-height:1.6;color:#3a3a3a;margin:12px 0 0;max-width:900px}
+@media (max-width:1100px){.hx-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.hx-duo,.hx-case,.hx-check{grid-template-columns:minmax(0,1fr)}.hx-myth{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:901px){.rubr-in{justify-content:space-between!important;gap:4px 16px!important;padding-left:56px!important;padding-right:56px!important}}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:140px}
+.logo{height:80px;width:auto;max-width:100%;display:block}
+@media (max-width:900px){.hdr{grid-template-columns:auto minmax(0,1fr) auto;gap:8px;height:88px}.hdr .btn{padding:0 12px;font-size:14px}.logo{height:34px}}
+</style>
+</head>
+<body>
+<div style="position:relative;width:100%;background:#fff;padding-bottom:80px">
+<section id="services" class="wrap sec">
+<div class="ann">05 · Чем&nbsp;реализуем — услуги из&nbsp;каталога</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap"><h2 class="h2">Чем&nbsp;реализуем</h2><a href="#" style="font-size:15px;font-weight:500">Весь каталог →</a></div>
+<div class="g2" style="margin-top:32px;gap:0 48px;border-top:1px solid #111">
+<a class="svc" href="#">Резервные ЦОДы и&nbsp;зоны доступности<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Кластеры высокой доступности и&nbsp;метрокластеры<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Модульный и&nbsp;контейнерный ЦОД<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Автоматизация, GitOps и&nbsp;«Инфраструктура как&nbsp;код»<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Программно-определяемые сети (SD-WAN)<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Частные сети LTE<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Системы резервного копирования<span aria-hidden="true">→</span></a>
+<a class="svc" href="#">Разработка ИТ-стратегии<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<section id="proof" class="wrap sec">
+<div class="ann">06 · Доказательства: проекты и&nbsp;площадки</div>
+<h2 class="h2">Доказательства</h2>
+<div class="g3" style="margin-top:40px">
+<a class="card" href="project-copy.html"><div class="lbl">Банк · Сбербанк Казахстан</div><div class="serif num" style="font-size:52px;white-space:nowrap">35</div><div style="font-size:17px;line-height:1.4">критичных ИТ-систем в&nbsp;геораспределённой инфраструктуре: три ЦОДа работают одновременно, независимо от&nbsp;сейсмики региона</div><span class="ans">Подробнее →</span></a>
+<a class="card" href="#"><div class="lbl">IT Elements 2026</div><div class="serif num" style="font-size:52px;white-space:nowrap">3000+</div><div style="font-size:17px;line-height:1.4">участников обсуждали переход от&nbsp;централизованной архитектуры к&nbsp;распределённой — от&nbsp;схемы до&nbsp;тестов отказа</div><span class="ans">Итоги →</span></a>
+<a class="card" href="#"><div class="lbl">Стенд · «Инфраструктура 2030»</div><div class="serif num" style="font-size:52px;white-space:nowrap"><span class="tbd">[N]</span></div><div style="font-size:17px;line-height:1.4">Отказ и&nbsp;восстановление компонентов на&nbsp;живом стенде <span class="tbd">[добавить замер]</span></div><span class="ans">Посмотреть →</span></a>
+</div>
+</section>
+
+<section id="case" class="wrap sec"><div class="hx-sh"><div class="lbl">Разбор кейса</div><h2 class="hx-h2">Два независимых модульных ЦОД вместо одной серверной</h2></div><div class="hx-case"><div class="l"><div class="lbl">Пищевая промышленность · МПК «Атяшевский»</div><div class="hx-part"><div class="lbl">Задача</div><p>Прежняя серверная убедила заказчика: отказоустойчивость для&nbsp;промышленного предприятия — не&nbsp;опция. Нужно было, чтобы склад и&nbsp;производство не&nbsp;останавливались при&nbsp;сбое одного узла.</p></div><div class="hx-part"><div class="lbl">Что&nbsp;сделали</div><p>Летом 2025 года в&nbsp;Мордовии возвели два параллельно работающих модульных ЦОД на&nbsp;открытой площадке. Они держат WMS, MES, системы учёта и&nbsp;другие критичные комплексы.</p></div><div class="hx-part"><div class="lbl">Результат</div><p>Схема с&nbsp;двумя независимыми узлами обеспечивает работу комбината в&nbsp;штатных и&nbsp;нештатных ситуациях. ЦОДы размещены так, что&nbsp;можно добавлять секции под&nbsp;будущие проекты.</p></div></div><div class="rr"><div><div class="num">2</div><div class="c">параллельно работающих модульных ЦОД</div></div><div><div class="num">100+ кВт</div><div class="c">максимальная мощность каждого, 9 шкафов 42U</div></div><div><div class="num">IP66</div><div class="c">пылевлагозащита, класс огнестойкости II</div></div></div></div></section>
+<section id="expertise" class="wrap sec">
+<div class="ann">07 · Экспертиза: исследования и&nbsp;мнение</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap">
+<div style="flex:1 1 560px;min-width:0">
+<h2 class="h2">Экспертиза</h2>
+<div style="margin-top:32px;border-top:1px solid #111">
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Репортаж · ICT-Online</span>Манифест непрерывности: новая концепция построения инфраструктуры</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">JETINFO · разбор по&nbsp;слоям</span>Архитектура непрерывности без&nbsp;единого центра</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">JETINFO · «Непрерывность 2.0»</span>Все за&nbsp;одного: георезервирование ЦОД</span><span aria-hidden="true">→</span></a>
+<a class="svc" href="#"><span><span class="lbl" style="display:block;margin-bottom:6px">Комментарий · РБК</span>Модульные и&nbsp;контейнерные ЦОДы после атак: что&nbsp;изменилось</span><span aria-hidden="true">→</span></a>
+</div>
+</div>
+<aside style="flex:0 1 380px;border-top:2px solid #111;padding-top:20px">
+<div class="lbl" style="color:#111">Мнение</div>
+<p class="serif" style="font-style:italic;font-size:24px;line-height:1.35;margin:16px 0 0">«Постоянство перемен — это&nbsp;новая норма»</p>
+<div style="display:flex;align-items:center;gap:12px;margin-top:20px"><div style="width:44px;height:44px;border-radius:50%;background:#D4F53C;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">ЮС</div><div style="font-size:14px"><div style="font-weight:600">Юрий Семенюков</div><div style="color:#5c5c5c">директор центра инфраструктурных решений</div></div></div>
+</aside>
+</div>
+</section>
+
+<section class="wrap" style="padding-top:64px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;border-top:1px solid #111;border-bottom:1px solid #111;padding:24px 0">
+<div class="lbl" style="color:#111">Экспертиза как&nbsp;сервис</div>
+<div style="flex:1 1 420px;font-size:18px;font-weight:500">Архитекторы Джета проверят инфраструктуру на&nbsp;единые точки отказа и&nbsp;соберут целевую архитектуру.</div>
+<a href="#" style="font-size:15px;font-weight:500">Подробнее →</a>
+</div>
+</section>
+
+<section id="check" class="wrap sec"><div class="hx-sh"><div class="lbl">Самопроверка</div><h2 class="hx-h2">Шесть вопросов, на&nbsp;которые стоит ответить до&nbsp;проекта</h2></div><div class="hx-check"><div><div class="hx-ci"><i></i><span>Сколько у&nbsp;вас площадок и&nbsp;работают ли они одновременно — или&nbsp;одна ждёт аварии?</span></div><div class="hx-ci"><i></i><span>Есть ли растянутые L2-сети и&nbsp;синхронная репликация между площадками?</span></div><div class="hx-ci"><i></i><span>Знают ли приложения, в&nbsp;какой зоне работают, и&nbsp;умеют ли переключаться сами?</span></div><div class="hx-ci"><i></i><span>Когда вы последний раз переключались на&nbsp;резервную площадку?</span></div><div class="hx-ci"><i></i><span>Управляется ли инфраструктура как&nbsp;код на&nbsp;всех площадках одинаково?</span></div><div class="hx-ci"><i></i><span>Есть ли автономная система резервного копирования в&nbsp;каждой зоне?</span></div></div><div class="hx-res"><div class="lbl">Как&nbsp;читать результат</div><p style="font-size:17px;line-height:1.5;margin:12px 0 20px">Если&nbsp;площадки связаны растянутыми сетями и&nbsp;общим доменом управления — у&nbsp;вас один большой домен отказа, а&nbsp;не&nbsp;несколько.</p><a class="btn btn-p" href="self-assessment-copy.html">Пройти полную самооценку</a></div></div></section>
+<section id="faq" class="wrap sec"><div class="hx-sh"><div class="lbl">Вопросы</div><h2 class="hx-h2">Частые вопросы</h2></div><div class="hx-faq"><details class="hx-fq" open=""><summary>Зачем три зоны, если&nbsp;можно две?</summary><p>При&nbsp;двух зонах отказ одной оставляет систему без&nbsp;запаса. Три равнозначные зоны перераспределяют нагрузку и&nbsp;сохраняют устойчивость даже во&nbsp;время аварии.</p></details><details class="hx-fq"><summary>Это&nbsp;дороже, чем&nbsp;основной и&nbsp;резервный ЦОД?</summary><p>Мощности не&nbsp;простаивают в&nbsp;ожидании аварии — все зоны работают. Платить приходится за&nbsp;сложность управления, её компенсирует инфраструктура как&nbsp;код.</p></details><details class="hx-fq"><summary>Нужно ли переписывать приложения?</summary><p>Часть логики устойчивости переходит на&nbsp;уровень приложения. Начинаем с&nbsp;критичных систем и&nbsp;с&nbsp;понимания, как&nbsp;они работают с&nbsp;данными.</p></details><details class="hx-fq"><summary>Как&nbsp;защитить площадки от&nbsp;физических угроз?</summary><p>Модульные и&nbsp;контейнерные ЦОДы можно перемещать: местоположение перестаёт быть постоянной точкой уязвимости.</p></details><details class="hx-fq"><summary>С&nbsp;чего начать?</summary><p>С&nbsp;поиска единых точек отказа: сетей, доменов управления, общих СХД и&nbsp;учётных записей.</p></details></div></section>
+<section id="contact" class="wrap sec">
+<div class="ann">08 · Эксперт и&nbsp;форма</div>
+<div style="display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid #111;padding-top:40px">
+<div style="flex:1 1 380px;display:flex;gap:24px;min-width:0">
+<div class="ph" style="flex:0 0 140px;height:180px">[фото эксперта]</div>
+<div><h2 class="h2" style="font-size:32px">Обсудите вашу архитектуру с&nbsp;экспертом</h2><div style="font-weight:600;margin-top:16px">Юрий Семенюков</div><div style="font-size:14px;color:#5c5c5c;margin-top:4px">директор центра инфраструктурных решений</div></div>
+</div>
+<form style="flex:1 1 480px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<label class="field">Имя<input type="text"></label>
+<label class="field">Компания<input type="text"></label>
+<label class="field">Телефон или&nbsp;e-mail<input type="text"></label>
+<label class="field">Должность<input type="text"></label>
+<label class="field" style="grid-column:1/-1">Сколько у&nbsp;вас площадок и&nbsp;что&nbsp;произойдёт, если&nbsp;одна станет недоступна?<textarea style="min-height:96px;padding:12px"></textarea></label>
+<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span style="font-size:12px;color:#5c5c5c">Нажимая «Отправить», вы соглашаетесь с&nbsp;политикой обработки данных</span><button class="btn btn-p" type="button">Отправить</button></div>
+</form>
+</div>
+</section>
+
+<section class="wrap sec">
+<div class="ann">09 · Связанные вызовы</div>
+<div class="lbl" style="color:#111">Другие вызовы</div>
+<div class="g3" style="margin-top:20px;row-gap:0">
+<a class="svc" href="hub-kiber-copy-1.html">Киберустойчивость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-ai-copy-1.html">ИИ в&nbsp;инфраструктуре и&nbsp;бизнесе<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-containers-copy-1.html">Контейнеры и&nbsp;open source<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-import-copy-1.html">Импортонезависимость<span aria-hidden="true">→</span></a>
+<a class="svc" href="hub-dc-copy-1.html">Свои ЦОД<span aria-hidden="true">→</span></a>
+</div>
+</section>
+
+<footer style="margin-top:110px;background:#111;color:#fff">
+<div class="wrap" style="padding-top:56px;padding-bottom:40px">
+<div class="g4" style="gap:32px">
+<div><div class="lbl" style="color:#a8a8a8">Вызовы</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hub-kiber-copy-1.html" style="color:#fff">Киберустойчивость</a><a href="hub-ai-copy-1.html" style="color:#fff">ИИ</a><a href="hub-containers-copy-1.html" style="color:#fff">Контейнеры и&nbsp;open source</a><a href="hub-import-copy-1.html" style="color:#fff">Импортонезависимость</a><a href="hub-decentral-copy-1.html" style="color:#fff">Децентрализация</a><a href="hub-dc-copy-1.html" style="color:#fff">Свои ЦОД</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Решения</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="catalog-copy.html" style="color:#fff">Услуги и&nbsp;решения</a><a href="industry-copy.html" style="color:#fff">По&nbsp;отраслям</a><a href="diagnostics-copy.html" style="color:#fff">Диагностика</a><a href="projects-copy.html" style="color:#fff">Проекты</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Компания</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="about-copy.html" style="color:#fff">О&nbsp;компании</a><a href="method-copy.html" style="color:#fff">Как&nbsp;мы работаем</a><a href="expertise-copy.html" style="color:#fff">Центр экспертизы</a><a href="career-copy.html" style="color:#fff">Карьера</a><a href="press-copy.html" style="color:#fff">Пресс-центр</a></div></div>
+<div><div class="lbl" style="color:#a8a8a8">Связаться</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:14px"><a href="hacked-copy.html" style="color:#D4F53C">Вас взломали? Горячая линия</a><a href="contacts-copy.html" style="color:#fff">Контакты и&nbsp;офисы</a><a href="contacts-copy.html" style="color:#fff">Поддержка заказчиков</a><span style="color:#fff">+7 495 411-76-01<br>info@jet.su</span></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #333;font-size:13px;color:#a8a8a8"><span>1991–2026 © «Инфосистемы Джет»</span><span>Jet CSIRT · CyberCamp · Jet RuLab · Политика данных · Реквизиты</span></div>
+</div>
+</footer>
+</div>
+</body>
+</html>
